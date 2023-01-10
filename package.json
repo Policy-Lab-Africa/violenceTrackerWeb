@@ -1,14 +1,16 @@
 {
-  "name": "typescript-nextjs-starter",
-  "description": "A TypeScript starter for Next.js that includes all you need to build amazing projects",
+  "name": "voilence-tracker",
+  "description": "Report and Share voilence incidence.",
   "version": "1.0.0",
   "private": true,
-  "author": "João Pedro Schmitz <hey@joaopedro.dev> (@jpedroschmitz)",
-  "license": "MIT",
+  "author": "Joseph O. Ajibodu <josephajibodu@gmail.com> (@cremirdevio)",
+  "license": "GNU",
   "keywords": [
-    "nextjs",
-    "starter",
-    "typescript"
+    "voilence tracker",
+    "election voilence",
+    "election incidence",
+    "voilence alert",
+    "voilence data"
   ],
   "scripts": {
     "dev": "next",
