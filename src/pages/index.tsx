@@ -8,6 +8,47 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { useState } from 'react';
+
+const HeroCTA = () => {
+  const [shouldSwitch, setShouldSwitch] = useState(false);
+
+  return (
+    <>
+      <Button
+        onMouseEnter={() => setShouldSwitch(true)}
+        onMouseLeave={() => setShouldSwitch(false)}
+        border={`1px`}
+        bgColor={shouldSwitch ? `white` : `primary.500`}
+        color={shouldSwitch ? `primary.500` : `white`}
+        _hover={{
+          borderColor: `primary.500`,
+          bgColor: `white`,
+          color: `primary.500`,
+        }}
+        transition=".5s"
+      >
+        Report Voilence
+      </Button>
+      <Button
+        onMouseEnter={() => setShouldSwitch(true)}
+        onMouseLeave={() => setShouldSwitch(false)}
+        bgColor={shouldSwitch ? `primary.500` : `surface`}
+        border={`1px`}
+        borderColor={`primary.500`}
+        color={shouldSwitch ? `white` : `primary.500`}
+        _hover={{
+          borderColor: `primary.500`,
+          bgColor: `primary.500`,
+          color: `white`,
+        }}
+        transition=".5s"
+      >
+        Access Data
+      </Button>
+    </>
+  );
+};
 
 export default function Home() {
   return (
@@ -44,17 +85,7 @@ export default function Home() {
             Report and share Violence Incidence directly on this platform.
           </Text>
           <Stack mt="24px" direction={`row`}>
-            <Button bgColor={`primary.500`} color={`white`}>
-              Report Voilence
-            </Button>
-            <Button
-              bgColor={`surface`}
-              border={`1px`}
-              borderColor={`primary.500`}
-              color={`primary.500`}
-            >
-              Access Data
-            </Button>
+            <HeroCTA />
           </Stack>
 
           <HStack mt={`48px`} spacing="32px">

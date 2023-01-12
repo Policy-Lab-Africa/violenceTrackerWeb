@@ -50,7 +50,7 @@ const NavItem = ({ item }: { item: NavItemData }) => {
   );
 };
 
-const LogoImage = chakra(NextImage, {
+export const LogoImage = chakra(NextImage, {
   shouldForwardProp: (prop) =>
     [
       `width`,
@@ -72,7 +72,7 @@ export default function Header() {
         width={`full`}
         justifyContent="space-between"
         alignItems="center"
-        px={`7rem`}
+        px={`5rem`}
         height={`124px`}
       >
         {/* Logo */}
