@@ -1,9 +1,9 @@
 import { Box, Text } from '@chakra-ui/react';
 
-export default function Header() {
+export default function Footer() {
   return (
     <Box>
-      <Text>Header</Text>
+      <Text>Footer</Text>
     </Box>
   );
 }

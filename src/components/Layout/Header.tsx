@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  chakra,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, chakra, Flex, Stack, Text } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { useState } from 'react';
 

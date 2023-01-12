@@ -1,6 +1,6 @@
-import { Icon } from '@chakra-ui/react';
+import { Icon, IconProps } from '@chakra-ui/react';
 
-export default function DangerIcon() {
+export default function DangerIcon(props: IconProps) {
   return (
     <Icon
       version="1.1"
@@ -9,6 +9,7 @@ export default function DangerIcon() {
       y="0px"
       viewBox="0 0 55.7 80.5"
       color={`accent`}
+      {...props}
     >
       <path
         id="Path_49"

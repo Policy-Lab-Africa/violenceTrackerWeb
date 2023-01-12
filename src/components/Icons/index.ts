@@ -1,3 +1,5 @@
 import DangerIcon from './DangerIcon';
-const Icons = { DangerIcon };
+import XMark from './XMark';
+
+const Icons = { DangerIcon, XMark };
 export default Icons;
