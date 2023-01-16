@@ -118,7 +118,7 @@ export default function Header() {
           alignItems="center"
           pl={[`0rem`, `5rem`]}
           pr={[`1rem`, `5rem`]}
-          height={`124px`}
+          height={`84px`}
         >
           {/* Logo */}
           <Flex>

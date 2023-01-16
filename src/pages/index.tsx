@@ -201,15 +201,15 @@ export default function Home() {
           </AnimatedBox>
           {/* <MapDirection boxSize={`24px`} color="primary.500" /> */}
         </VStack>
-        <VStack justifyContent={`flex-start`} height={[`full`]} width={`full`}>
+        <VStack justifyContent={`flex-start`} height={[`full`]}>
           <Video
             outlineColor={`primary.dark`}
             borderColor={`primary.dark`}
             borderWidth="4px"
             autoPlay
             loop
-            width={`full`}
-            // height={`full`}
+            // width={`full`}
+            height={`full`}
           >
             <source src="/assets/video/map-animation.mp4" type="video/mp4" />
           </Video>

@@ -16,7 +16,7 @@ export default function MarqueeHeader() {
   return (
     <Stack
       direction={`row`}
-      height={`45px`}
+      height={`36px`}
       width={`full`}
       bgColor={`accent`}
       alignItems="center"
