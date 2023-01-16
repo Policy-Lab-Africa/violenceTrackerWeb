@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: JSX.Element }) {
 
       <Box>
         <Header />
-        <MarqueeHeader />
+        <Box height={`169px`} />
         {children}
         <Footer />
       </Box>

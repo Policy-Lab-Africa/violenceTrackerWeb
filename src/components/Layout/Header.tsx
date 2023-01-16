@@ -3,6 +3,7 @@ import {
   Button,
   chakra,
   Flex,
+  Heading,
   shouldForwardProp,
   Stack,
   Text,
@@ -12,6 +13,7 @@ import {
 import { isValidMotionProp, motion, useMotionValue } from 'framer-motion';
 import { useState } from 'react';
 import { NextChakraImage } from '../Images/NextChakraImage';
+import MarqueeHeader from './MarqueeHeader';
 
 interface NavItemData {
   label: string;
@@ -86,85 +88,127 @@ export default function Header() {
     closed: { top: `75%`, rotate: `0deg` },
   };
 
+  const headerVariant = {
+    open: {
+      backgroundColor: `red`,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      left: 0,
+    },
+    closed: { top: 0, bottom: 0, right: 0, left: 0, backgroundColor: `blue` },
+  };
+
   return (
-    <Box bgColor={`surface`} width={`full`} fontSize={`1rem`}>
-      {/* Main Nav Container */}
-      <Flex
-        width={`full`}
-        justifyContent="space-between"
-        alignItems="center"
-        pl={[`0rem`, `5rem`]}
-        pr={[`1rem`, `5rem`]}
-        height={`124px`}
-      >
-        {/* Logo */}
-        <Flex>
-          <NextChakraImage
-            src={`/assets/Logo/voilence-tracker.svg`}
-            alt="Voilence Tracker Logo"
-            width={`126`}
-            height={`66`}
-          />
-        </Flex>
-
-        {/* Desktop Nav */}
-        <Flex display={[`none`, `flex`]}>
-          <Stack direction={`row`} alignItems="center">
-            {NAV_ITEM.map((item) => (
-              <NavItem item={item} key={item.label} />
-            ))}
-
-            <Button
-              _hover={{
-                bgColor: `surface`,
-                color: `primary.500`,
-                border: `1px`,
-              }}
-              color={`white`}
-              bgColor={`primary.500`}
-            >
-              Report Violence
-            </Button>
-          </Stack>
-        </Flex>
-
-        {/* Hamburger */}
+    <AnimatedBox
+      bgColor={`surface`}
+      zIndex="10"
+      width={`full`}
+      fontSize={`1rem`}
+      position={`fixed`}
+      height={[`max-content`]}
+      overflow={`hidden`}
+      animate={isOpen ? { height: `100vh` } : { height: `max-content` }}
+    >
+      <VStack width={`full`}>
+        {/* Main Nav Container */}
         <Flex
+          width={`full`}
+          justifyContent="space-between"
+          alignItems="center"
+          pl={[`0rem`, `5rem`]}
+          pr={[`1rem`, `5rem`]}
+          height={`124px`}
+        >
+          {/* Logo */}
+          <Flex>
+            <NextChakraImage
+              src={`/assets/Logo/voilence-tracker.svg`}
+              alt="Voilence Tracker Logo"
+              width={`126`}
+              height={`66`}
+            />
+          </Flex>
+
+          {/* Desktop Nav */}
+          <Flex display={[`none`, `flex`]}>
+            <Stack direction={`row`} alignItems="center">
+              {NAV_ITEM.map((item) => (
+                <NavItem item={item} key={item.label} />
+              ))}
+
+              <Button
+                _hover={{
+                  bgColor: `surface`,
+                  color: `primary.500`,
+                  border: `1px`,
+                }}
+                color={`white`}
+                bgColor={`primary.500`}
+              >
+                Report Violence
+              </Button>
+            </Stack>
+          </Flex>
+
+          {/* Hamburger */}
+          <Flex
+            display={[`flex`, `none`]}
+            position={`relative`}
+            width={`48px`}
+            height={`48px`}
+            justifyContent={`center`}
+            onClick={onToggle}
+          >
+            <AnimatedBox
+              variants={barAVariant}
+              animate={isOpen ? `open` : `closed`}
+              position={`absolute`}
+              top={`25%`}
+              height={`2px`}
+              width={`80%`}
+              bgColor={`primary.500`}
+            />
+            <AnimatedBox
+              variants={barBVariant}
+              animate={isOpen ? `open` : `closed`}
+              position={`absolute`}
+              top={`50%`}
+              height={`2px`}
+              width={`50%`}
+              bgColor={`primary.500`}
+            />
+            <AnimatedBox
+              variants={barCVariant}
+              animate={isOpen ? `open` : `closed`}
+              position={`absolute`}
+              top={`75%`}
+              height={`2px`}
+              width={`80%`}
+              bgColor={`primary.500`}
+            />
+          </Flex>
+        </Flex>
+
+        <MarqueeHeader />
+
+        {/* Mobile Nav Container */}
+        <Box
+          display={[`flex`, `none`]}
           position={`relative`}
-          width={`48px`}
-          height={`48px`}
-          justifyContent={`center`}
-          onClick={onToggle}
+          height={`full`}
+          width={`full`}
         >
           <AnimatedBox
-            variants={barAVariant}
-            animate={isOpen ? barAVariant.open : barAVariant.closed}
             position={`absolute`}
-            top={`25%`}
-            height={`2px`}
-            width={`80%`}
-            bgColor={`primary.500`}
-          />
-          <AnimatedBox
-            variants={barBVariant}
-            animate={isOpen ? barBVariant.open : barBVariant.closed}
-            position={`absolute`}
-            top={`50%`}
-            height={`2px`}
-            width={`50%`}
-            bgColor={`primary.500`}
-          />
-          <AnimatedBox
-            variants={barCVariant}
-            animate={isOpen ? barCVariant.open : barCVariant.closed}
-            position={`absolute`}
-            top={`75%`}
-            height={`2px`}
-            width={`80%`}
-            bgColor={`primary.500`}
-          />
-        </Flex>
-      </Flex>
-    </Box>
+            bgColor="primary.500"
+            width={`full`}
+            height={`full`}
+          >
+            <Heading>Our Mobile Navigation</Heading>
+          </AnimatedBox>
+        </Box>
+      </VStack>
+    </AnimatedBox>
   );
 }
