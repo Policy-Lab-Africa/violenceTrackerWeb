@@ -75,12 +75,19 @@ export default function Home() {
   return (
     <Box>
       {/* Hero Section */}
-      <Flex width={`full`} px={`6rem`} height="500px" alignItems={`center`}>
+      <Flex
+        direction={[`column`, `row`]}
+        width={`full`}
+        px={[`1rem`, `6rem`]}
+        pt={[`4rem`, ``]}
+        height={[`max-content`, `500px`]}
+        alignItems={`center`}
+      >
         <Container flexGrow={1}>
           <Heading
             color={`secondary.600`}
             fontWeight={`semibold`}
-            fontSize="5xl"
+            fontSize={[`4xl`, `5xl`]}
           >
             See{` `}
             <Text as={`span`} fontWeight={`extrabold`} color="primary.500">
@@ -90,7 +97,7 @@ export default function Home() {
           <Heading
             color={`secondary.600`}
             fontWeight={`semibold`}
-            fontSize="5xl"
+            fontSize={[`4xl`, `5xl`]}
           >
             Share{` `}
             <Text as={`span`} fontWeight={`extrabold`} color="primary.500">
@@ -109,16 +116,30 @@ export default function Home() {
             <HeroCTA />
           </Stack>
 
-          <HStack mt={`48px`} spacing="32px">
-            <Text color={`secondary.600`} fontWeight={`bold`} fontSize="md">
+          <Stack
+            direction={[`column`, `row`]}
+            mt={`48px`}
+            spacing={[`16px`, `32px`]}
+          >
+            <Text
+              whiteSpace={`nowrap`}
+              color={`secondary.600`}
+              fontWeight={`bold`}
+              fontSize="md"
+            >
               <XMark color={`accent`} boxSize={`16px`} mr="8px" />
               No Registration Needed
             </Text>
-            <Text color={`secondary.600`} fontWeight={`bold`} fontSize="md">
+            <Text
+              whiteSpace={`nowrap`}
+              color={`secondary.600`}
+              fontWeight={`bold`}
+              fontSize="md"
+            >
               <XMark color={`accent`} boxSize={`16px`} mr="8px" />
               No Personal Data Collected
             </Text>
-          </HStack>
+          </Stack>
         </Container>
 
         <Container alignSelf={`end`}>
@@ -135,11 +156,13 @@ export default function Home() {
 
       {/* Highlight section */}
       <Stack
-        px={`6rem`}
+        px={[`3rem`, `6rem`]}
+        pt={[`4rem`, `0rem`]}
         width="full"
-        height={`200px`}
+        height={[`350px`, `200px`]}
         bgColor={`primary.dark`}
-        direction={`row`}
+        direction={[`column`, `row`]}
+        justifyContent={[`center`]}
       >
         <VStack justifyContent={`center`} height={`100%`}>
           <Heading
@@ -178,7 +201,7 @@ export default function Home() {
           </AnimatedBox>
           {/* <MapDirection boxSize={`24px`} color="primary.500" /> */}
         </VStack>
-        <Box width={`full`}>
+        <VStack justifyContent={`flex-start`} height={[`full`]} width={`full`}>
           <Video
             outlineColor={`primary.dark`}
             borderColor={`primary.dark`}
@@ -186,15 +209,15 @@ export default function Home() {
             autoPlay
             loop
             width={`full`}
-            height={`full`}
+            // height={`full`}
           >
             <source src="/assets/video/map-animation.mp4" type="video/mp4" />
           </Video>
-        </Box>
+        </VStack>
       </Stack>
 
       {/* Map */}
-      <Box px={`6rem`} py={`6rem`}>
+      <Box px={[`1rem`, `6rem`]} py={[`1rem`, `6rem`]}>
         <AspectRatio ratio={16 / 9}>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d3.375295414770757!3d6.5276316452784755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos!5e0!3m2!1sen!2sng!4v1567723392506!5m2!1sen!2sng" />
         </AspectRatio>
