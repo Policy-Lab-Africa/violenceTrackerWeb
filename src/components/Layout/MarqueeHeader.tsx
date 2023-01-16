@@ -23,8 +23,8 @@ export default function MarqueeHeader() {
     >
       <Stack
         direction={`row`}
-        ml={`6rem`}
-        px="8px"
+        ml={[`1rem`, `6rem`]}
+        px={[`8px`]}
         height={`100%`}
         bgColor="surface"
         alignItems={`center`}
