@@ -1,5 +1,5 @@
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
-import { LogoImage } from './Header';
+import { NextChakraImage } from '../Images/NextChakraImage';
 
 export default function Footer() {
   return (
@@ -11,7 +11,7 @@ export default function Footer() {
       pb={`1rem`}
     >
       <Box>
-        <LogoImage
+        <NextChakraImage
           src={`/assets/Logo/voilence-tracker.svg`}
           alt="Voilence Tracker Logo"
           width={`126`}

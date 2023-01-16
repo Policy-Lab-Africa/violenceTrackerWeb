@@ -1,6 +1,6 @@
 import { Box, Button, chakra, Flex, Stack, Text } from '@chakra-ui/react';
-import NextImage from 'next/image';
 import { useState } from 'react';
+import { NextChakraImage } from '../Images/NextChakraImage';
 
 interface NavItemData {
   label: string;
@@ -50,20 +50,6 @@ const NavItem = ({ item }: { item: NavItemData }) => {
   );
 };
 
-export const LogoImage = chakra(NextImage, {
-  shouldForwardProp: (prop) =>
-    [
-      `width`,
-      `height`,
-      `src`,
-      `alt`,
-      `quality`,
-      `placeholder`,
-      `blurDataURL`,
-      `loader`,
-    ].includes(prop),
-});
-
 export default function Header() {
   return (
     <Box bgColor={`surface`} width={`full`} fontSize={`1rem`}>
@@ -77,7 +63,7 @@ export default function Header() {
       >
         {/* Logo */}
         <Flex>
-          <LogoImage
+          <NextChakraImage
             src={`/assets/Logo/voilence-tracker.svg`}
             alt="Voilence Tracker Logo"
             width={`126`}

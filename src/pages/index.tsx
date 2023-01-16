@@ -1,13 +1,22 @@
+import MapDirection from '@/components/Icons/MapDirection';
 import XMark from '@/components/Icons/XMark';
+import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import {
+  AspectRatio,
+  Box,
   Button,
+  chakra,
   Container,
   Flex,
   Heading,
   HStack,
+  shouldForwardProp,
   Stack,
   Text,
+  VStack,
 } from '@chakra-ui/react';
+import { isValidMotionProp, motion } from 'framer-motion';
+import { ST } from 'next/dist/shared/lib/utils';
 import { useState } from 'react';
 
 const HeroCTA = () => {
@@ -50,12 +59,24 @@ const HeroCTA = () => {
   );
 };
 
+const Video = chakra(`video`, {
+  shouldForwardProp: () => true,
+});
+
+const AnimatedBox = chakra(motion.div, {
+  /**
+   * Allow motion props and non-Chakra props to be forwarded.
+   */
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+
 export default function Home() {
   return (
-    <HStack>
+    <Box>
       {/* Hero Section */}
-      <Flex width={`full`} px={`6rem`}>
-        <Container flexGrow={1} py={`5rem`}>
+      <Flex width={`full`} px={`6rem`} height="500px" alignItems={`center`}>
+        <Container flexGrow={1}>
           <Heading
             color={`secondary.600`}
             fontWeight={`semibold`}
@@ -100,8 +121,84 @@ export default function Home() {
           </HStack>
         </Container>
 
-        <Container></Container>
+        <Container alignSelf={`end`}>
+          {/* Desktop Image */}
+          <NextChakraImage
+            src={`/assets/images/see-omething-say-something.png`}
+            alt="See something, Say something."
+            width={`800`}
+            height={`500`}
+            objectFit="contain"
+          />
+        </Container>
       </Flex>
-    </HStack>
+
+      {/* Highlight section */}
+      <Stack
+        px={`6rem`}
+        width="full"
+        height={`200px`}
+        bgColor={`primary.dark`}
+        direction={`row`}
+      >
+        <VStack justifyContent={`center`} height={`100%`}>
+          <Heading
+            whiteSpace={`nowrap`}
+            color={`white`}
+            fontSize={`2xl`}
+            px={`24px`}
+            mb={`8px`}
+          >
+            Track Violence using the{` `}
+            <Text display={`block`} color={`primary.500`}>
+              Interactive Map Feature
+            </Text>
+          </Heading>
+          <AnimatedBox
+            animate={{
+              // scale: [1, 2, 2, 1, 1],
+              translateY: [`0%`, `5%`, `10%`, `20%`, `10%`, `5%`, `0%`],
+            }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{
+              duration: 2,
+              ease: `easeInOut`,
+              repeat: Infinity,
+              repeatType: `loop`,
+            }}
+          >
+            <NextChakraImage
+              src={`/assets/icons/thin-direction-pointer-bottom-icon.svg`}
+              alt="Direction pointer"
+              width={`8`}
+              height={`8`}
+              objectFit="contain"
+            />
+          </AnimatedBox>
+          {/* <MapDirection boxSize={`24px`} color="primary.500" /> */}
+        </VStack>
+        <Box width={`full`}>
+          <Video
+            outlineColor={`primary.dark`}
+            borderColor={`primary.dark`}
+            borderWidth="4px"
+            autoPlay
+            loop
+            width={`full`}
+            height={`full`}
+          >
+            <source src="/assets/video/map-animation.mp4" type="video/mp4" />
+          </Video>
+        </Box>
+      </Stack>
+
+      {/* Map */}
+      <Box px={`6rem`} py={`6rem`}>
+        <AspectRatio ratio={16 / 9}>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d3.375295414770757!3d6.5276316452784755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos!5e0!3m2!1sen!2sng!4v1567723392506!5m2!1sen!2sng" />
+        </AspectRatio>
+      </Box>
+    </Box>
   );
 }
