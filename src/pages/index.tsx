@@ -142,16 +142,21 @@ export default function Home() {
           </Stack>
         </Container>
 
-        <Container alignSelf={`end`}>
+        <Flex
+          mt={[`16px`, `0`]}
+          alignItems={`end`}
+          width={`full`}
+          height={`full`}
+        >
           {/* Desktop Image */}
           <NextChakraImage
             src={`/assets/images/see-omething-say-something.png`}
             alt="See something, Say something."
-            width={`800`}
-            height={`500`}
-            objectFit="contain"
+            width={`900`}
+            height={`450`}
+            objectFit="cover"
           />
-        </Container>
+        </Flex>
       </Flex>
 
       {/* Highlight section */}
