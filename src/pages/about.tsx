@@ -44,6 +44,80 @@ export default function About() {
           />
         </Container>
       </Stack>
+
+      <Stack
+        direction={[`column-reverse`, `row-reverse`]}
+        pt={[`12px`, `12px`]}
+      >
+        <Container
+          width={`container.xl`}
+          display={`flex`}
+          flexDirection={`column`}
+          justifyContent={`center`}
+          py={[`16px`, `0`]}
+        >
+          <Heading
+            fontSize={`2xl`}
+            fontWeight={`semibold`}
+            color={`primary.500`}
+          >
+            How does it work?
+          </Heading>
+          <Text fontSize={`sm`} fontWeight={`medium`}>
+            Using the Independent Electoral Commission of Nigeria’s (INEC)
+            polling unit data and deploying OpenStreet Map to geolocate each
+            polling unit address and enable user identification to verify the
+            locations. Users can report incidents with Texts and Multimedia.
+            Reports are visualized on a map using Leaflet and infographics. The
+            data collected is open source and available for download and export.
+          </Text>
+        </Container>
+        <Container>
+          <NextChakraImage
+            src={`/assets/images/how-it-works.png`}
+            alt="How does it work?"
+            width={`400`}
+            height={`400`}
+            objectFit={`contain`}
+          />
+        </Container>
+      </Stack>
+
+      <Stack direction={[`column`, `row`]} pt={[`12px`, `12px`]}>
+        <Container
+          width={`container.xl`}
+          display={`flex`}
+          flexDirection={`column`}
+          justifyContent={`center`}
+          py={[`16px`, `0`]}
+        >
+          <Heading
+            fontSize={`2xl`}
+            fontWeight={`semibold`}
+            color={`primary.500`}
+          >
+            About us: www.policylabAfrica.org
+          </Heading>
+          <Text fontSize={`sm`} fontWeight={`medium`}>
+            PolicyLab Africa is a policy and advocacy think tank working to
+            build a sustainable digital future for all. Our focus is on
+            supporting breakthrough advocacy and research at the nexus of policy
+            and humanity and leading high-impact change projects in Africa. We
+            have a sound field and knowledge of policy, digital rights, and
+            human rights and a good grasp of policy issues including
+            intersectional areas of ethics, gender, and civic space.
+          </Text>
+        </Container>
+        <Container>
+          <NextChakraImage
+            src={`/assets/images/policy-labs.png`}
+            alt="About us: www.policylabAfrica.org"
+            width={`400`}
+            height={`400`}
+            objectFit={`contain`}
+          />
+        </Container>
+      </Stack>
     </VStack>
   );
 }
