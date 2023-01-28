@@ -4,10 +4,14 @@ import { Container, Stack, Text, VStack } from '@chakra-ui/react';
 
 export default function About() {
   return (
-    <VStack>
-      <Stack direction={[`column`, `row`]} pt={[`12px`, `12px`]}>
+    <VStack width={`full`}>
+      <Stack
+        direction={[`column`, `row`]}
+        pt={[`12px`, `12px`]}
+        px={[`8px`, `5rem`]}
+      >
         <Container
-          width={`container.xl`}
+          maxWidth={[`container.md`, `container.xl`]}
           display={`flex`}
           flexDirection={`column`}
           justifyContent={`center`}
@@ -16,7 +20,9 @@ export default function About() {
           <AnimatedHeading
             initial={{ opacity: 0, translateY: 50 }}
             whileInView={{ translateY: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{ duration: 0.8 }}
             fontSize={`2xl`}
             fontWeight={`semibold`}
             color={`primary.500`}
@@ -24,10 +30,12 @@ export default function About() {
             What is the Election Violence Tracker (EVT)
           </AnimatedHeading>
           <AnimatedText
-            initial={{ opacity: 0, translateY: 100 }}
+            initial={{ opacity: 0, translateY: 80 }}
             whileInView={{ translateY: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
-            fontSize={`sm`}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{ duration: 0.6 }}
+            fontSize={`md`}
             fontWeight={`medium`}
             color={`secondary.500`}
             lineHeight={`1.7`}
@@ -46,7 +54,8 @@ export default function About() {
             Endowment for Democracy (NED).
           </AnimatedText>
         </Container>
-        <Container>
+
+        <Container display={`flex`} justifyContent={`center`}>
           <NextChakraImage
             src={`/assets/images/what-is-evt.png`}
             alt="What is the Election Violence Tracker (EVT)"
@@ -58,11 +67,12 @@ export default function About() {
       </Stack>
 
       <Stack
-        direction={[`column-reverse`, `row-reverse`]}
+        direction={[`column`, `row-reverse`]}
         pt={[`12px`, `12px`]}
+        px={[`8px`, `5rem`]}
       >
         <Container
-          width={`container.xl`}
+          maxWidth={[`container.md`, `container.xl`]}
           display={`flex`}
           flexDirection={`column`}
           justifyContent={`center`}
@@ -71,7 +81,9 @@ export default function About() {
           <AnimatedHeading
             initial={{ opacity: 0, translateY: 50 }}
             whileInView={{ translateY: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{ duration: 0.8 }}
             fontSize={`2xl`}
             fontWeight={`semibold`}
             color={`primary.500`}
@@ -79,10 +91,12 @@ export default function About() {
             How does it work?
           </AnimatedHeading>
           <AnimatedText
-            initial={{ opacity: 0, translateY: 50 }}
+            initial={{ opacity: 0, translateY: 80 }}
             whileInView={{ translateY: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
-            fontSize={`sm`}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{ duration: 0.6 }}
+            fontSize={`md`}
             fontWeight={`medium`}
             color={`secondary.500`}
             lineHeight={`1.7`}
@@ -95,7 +109,7 @@ export default function About() {
             data collected is open source and available for download and export.
           </AnimatedText>
         </Container>
-        <Container>
+        <Container display={`flex`} justifyContent={`center`}>
           <NextChakraImage
             src={`/assets/images/how-it-works.png`}
             alt="How does it work?"
@@ -106,9 +120,13 @@ export default function About() {
         </Container>
       </Stack>
 
-      <Stack direction={[`column`, `row`]} pt={[`12px`, `12px`]}>
+      <Stack
+        direction={[`column`, `row`]}
+        pt={[`12px`, `12px`]}
+        px={[`8px`, `5rem`]}
+      >
         <Container
-          width={`container.xl`}
+          maxWidth={[`container.md`, `container.xl`]}
           display={`flex`}
           flexDirection={`column`}
           justifyContent={`center`}
@@ -117,7 +135,9 @@ export default function About() {
           <AnimatedHeading
             initial={{ opacity: 0, translateY: 50 }}
             whileInView={{ translateY: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{ duration: 0.8 }}
             fontSize={`2xl`}
             fontWeight={`semibold`}
             color={`primary.500`}
@@ -125,10 +145,12 @@ export default function About() {
             About us: www.policylabAfrica.org
           </AnimatedHeading>
           <AnimatedText
-            initial={{ opacity: 0, translateY: 50 }}
+            initial={{ opacity: 0, translateY: 80 }}
             whileInView={{ translateY: 0, opacity: 1 }}
-            // transition={{ duration: 0.5 }}
-            fontSize={`sm`}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore no problem in operation, although type error appears.
+            transition={{ duration: 0.6 }}
+            fontSize={`md`}
             fontWeight={`medium`}
             color={`secondary.500`}
             lineHeight={`1.7`}
@@ -142,7 +164,7 @@ export default function About() {
             intersectional areas of ethics, gender, and civic space.
           </AnimatedText>
         </Container>
-        <Container>
+        <Container display={`flex`} justifyContent={`center`}>
           <NextChakraImage
             src={`/assets/images/policy-labs.png`}
             alt="About us: www.policylabAfrica.org"
