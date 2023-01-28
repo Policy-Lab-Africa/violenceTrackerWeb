@@ -20,9 +20,10 @@ export default function ReportViolence() {
       background={`black`}
       alignItems={`start`}
       backgroundImage={`/assets/images/report-violence.png`}
-      backgroundSize={`contain`}
+      backgroundRepeat="no-repeat"
+      backgroundSize={`cover`}
     >
-      <Heading fontSize={`xl`} fontWeight={`bold`} color={`primary.500`}>
+      <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
         Report Violence
       </Heading>
       <Text fontSize={`sm`} fontWeight={`semibold`} color={`white`}>
