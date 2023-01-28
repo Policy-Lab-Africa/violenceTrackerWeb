@@ -1,19 +1,27 @@
 import {
   Button,
-  Center,
   Container,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
   Select,
   Text,
   Textarea,
   VStack,
 } from '@chakra-ui/react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
+import { CheckIcon, TriangleDownIcon, AttachmentIcon } from '@chakra-ui/icons';
 
 export default function ReportViolence() {
   return (
-    <VStack px={`6rem`} py={`5rem`} background={`black`} alignItems={`start`}>
+    <VStack
+      px={[`1rem`, `6rem`]}
+      py={`5rem`}
+      background={`black`}
+      alignItems={`start`}
+      backgroundImage={`/assets/images/report-violence.png`}
+      backgroundSize={`contain`}
+    >
       <Heading fontSize={`xl`} fontWeight={`bold`} color={`primary.500`}>
         Report Violence
       </Heading>
@@ -26,7 +34,7 @@ export default function ReportViolence() {
         flexDirection={`column`}
         alignItems={`center`}
         alignSelf={`center`}
-        width={`md`}
+        maxWidth={[`sm`, `md`]}
       >
         <Select
           icon={<TriangleDownIcon color={`primary.500`} />}
@@ -84,15 +92,19 @@ export default function ReportViolence() {
           <option value="option3">Option 3</option>
         </Select>
 
-        <Input
-          type={`text`}
-          bgColor={`white`}
-          color={`secondary.700`}
-          fontSize={`sm`}
-          fontWeight={`semibold`}
-          my={`8px`}
-          placeholder={`Upload Evidence`}
-        />
+        <InputGroup my={`8px`}>
+          <Input
+            type={`text`}
+            bgColor={`white`}
+            color={`secondary.700`}
+            fontSize={`sm`}
+            fontWeight={`semibold`}
+            placeholder={`Upload Evidence`}
+          />
+          <InputRightElement>
+            <AttachmentIcon color="green.500" />
+          </InputRightElement>
+        </InputGroup>
 
         <Textarea
           bgColor={`white`}
