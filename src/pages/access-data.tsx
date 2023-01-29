@@ -1,3 +1,5 @@
+import { FilterIcon, SearchIconOutline } from '@/components/Icons';
+import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
 import {
   Box,
   Button,
@@ -7,13 +9,10 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Select,
   Text,
-  Textarea,
   VStack,
 } from '@chakra-ui/react';
-import { FaFilter } from 'react-icons/fa';
-import { MdFileUpload, MdSearch } from 'react-icons/md';
+import { DateRange } from 'react-date-range';
 
 export default function AccessData() {
   return (
@@ -21,6 +20,7 @@ export default function AccessData() {
       backgroundImage={`/assets/images/map-bg.svg`}
       backgroundRepeat={`no-repeat`}
       backgroundSize={`cover`}
+      minHeight={`90vh`}
     >
       <VStack px={[`1rem`, `6rem`]} py={`5rem`} alignItems={`start`}>
         <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
@@ -31,32 +31,28 @@ export default function AccessData() {
         </Text>
 
         <Container
-          maxWidth={[`sm`, `md`]}
+          maxWidth={[`sm`, `lg`]}
+          height={`full`}
           display={`flex`}
           alignSelf={`center`}
           flexDirection={`column`}
           justifyContent={`center`}
+          alignItems={`center`}
         >
-          <InputGroup my={`8px`}>
-            <InputLeftElement>
-              <MdFileUpload color="green.500" />
-            </InputLeftElement>
-            <Input
-              type={`text`}
-              bgColor={`white`}
-              color={`secondary.700`}
-              fontSize={`sm`}
-              fontWeight={`semibold`}
-              placeholder={`Search with State or LGA or Polling Unit`}
-              size="lg"
-            />
-            <InputRightElement>
-              <MdSearch color="green.500" />
-            </InputRightElement>
-          </InputGroup>
+          <SearchWithFilter />
 
-          <Button bgColor={`primary.500`} color={`white`} width={`80%`}>
-            Submit Report
+          <Button
+            bgColor={`primary.500`}
+            color={`white`}
+            width={`80%`}
+            mb="12px"
+            _hover={{
+              bgColor: `surface`,
+              color: `primary.500`,
+              border: `1px`,
+            }}
+          >
+            Search
           </Button>
 
           <Text fontSize={`sm`} fontWeight={`semibold`} color={`primary.500`}>

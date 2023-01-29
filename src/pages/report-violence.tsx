@@ -116,7 +116,16 @@ export default function ReportViolence() {
           placeholder={`Description of Incidence`}
         />
 
-        <Button bgColor={`primary.500`} color={`white`} width={`80%`}>
+        <Button
+          bgColor={`primary.500`}
+          color={`white`}
+          width={`80%`}
+          _hover={{
+            bgColor: `surface`,
+            color: `primary.500`,
+            border: `1px`,
+          }}
+        >
           Submit Report
         </Button>
       </Container>
