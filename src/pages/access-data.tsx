@@ -17,13 +17,14 @@ import {
   Flex,
   Heading,
   HStack,
+  Input,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { count } from 'console';
 import { useState } from 'react';
 
-type ValidState = `idle` | `loading` | `failed` | `completed`;
+type ValidState = `idle` | `loading` | `failed` | `completed` | `download`;
 
 interface UnitReport {
   count: number;
@@ -50,7 +51,7 @@ const currentReport: Report = {
 };
 
 export default function AccessData() {
-  const [pageState, setPageState] = useState<ValidState>(`loading`);
+  const [pageState, setPageState] = useState<ValidState>(`download`);
   const [report, setReport] = useState<Report>(currentReport);
 
   return (
@@ -60,7 +61,7 @@ export default function AccessData() {
       backgroundSize={`cover`}
       minHeight={`90vh`}
     >
-      {!report && (
+      {false && (
         <VStack px={[`1rem`, `6rem`]} py={`5rem`} alignItems={`start`}>
           <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
             Access Data
@@ -147,6 +148,7 @@ export default function AccessData() {
           alignItems={`center`}
           width={`full`}
         >
+          {/* Heading */}
           <Flex
             direction={`row`}
             justifyContent={`space-between`}
@@ -171,83 +173,124 @@ export default function AccessData() {
             </Flex>
           </Flex>
 
-          <Container
-            display={`flex`}
-            maxWidth={`container.md`}
-            flexDirection={`row`}
-            flexWrap={`wrap`}
-            justifyContent="center"
-            rowGap={`48px`}
-            width="100%"
-            pt="56px"
-          >
-            {report.data.map((info, index) => (
-              <Flex
-                key={index}
-                direction={`column`}
-                width={`25%`}
-                alignItems={`center`}
+          {pageState == `download` ? (
+            <Container
+              maxWidth={[`sm`, `lg`]}
+              height={`full`}
+              display={`flex`}
+              alignSelf={`center`}
+              flexDirection={`column`}
+              justifyContent={`center`}
+              alignItems={`center`}
+              py="48px"
+            >
+              <Input
+                type={`email`}
+                placeholder="Please input your email address"
+                size="lg"
+                focusBorderColor="primary.500"
+                mb={`24px`}
+              />
+
+              <Button
+                bgColor={`primary.500`}
+                color={`white`}
+                width={`80%`}
+                mb="12px"
+                _hover={{
+                  bgColor: `surface`,
+                  color: `primary.500`,
+                  border: `1px`,
+                }}
               >
-                <ReportIcon size={48} my={`12px`} />
-                <Text fontSize={`sm`}>
-                  {info.description.split(`:x:`)[0]}
-                  {` `}
-                  <Text color="primary.500" fontSize={`2xl`} display={`inline`}>
-                    {info.count}
+                Download Report
+              </Button>
+            </Container>
+          ) : (
+            <VStack>
+              <Container
+                display={`flex`}
+                maxWidth={`container.md`}
+                flexDirection={`row`}
+                flexWrap={`wrap`}
+                justifyContent="center"
+                rowGap={`48px`}
+                width="100%"
+                pt="56px"
+              >
+                {report.data.map((info, index) => (
+                  <Flex
+                    key={index}
+                    direction={`column`}
+                    width={`25%`}
+                    alignItems={`center`}
+                  >
+                    <ReportIcon size={48} my={`12px`} />
+                    <Text fontSize={`sm`}>
+                      {info.description.split(`:x:`)[0]}
+                      {` `}
+                      <Text
+                        color="primary.500"
+                        fontSize={`2xl`}
+                        display={`inline`}
+                      >
+                        {info.count}
+                      </Text>
+                      {` `}
+                      {info.description.split(`:x:`)[1]}
+                    </Text>
+                  </Flex>
+                ))}
+              </Container>
+
+              <Container maxWidth={`container.md`} py={`56px`}>
+                <Text>
+                  <Text
+                    display={`inline`}
+                    color={`primary.500`}
+                    fontWeight={`bold`}
+                  >
+                    Data Summary:
                   </Text>
                   {` `}
-                  {info.description.split(`:x:`)[1]}
+                  {report.summary}
                 </Text>
-              </Flex>
-            ))}
-          </Container>
+              </Container>
 
-          <Container maxWidth={`container.md`} py={`56px`}>
-            <Text>
-              <Text
-                display={`inline`}
-                color={`primary.500`}
-                fontWeight={`bold`}
+              <Flex
+                gap={`28px`}
+                justifyContent={`center`}
+                width={`full`}
+                py={`24px`}
               >
-                Data Summary:
-              </Text>
-              {` `}
-              {report.summary}
-            </Text>
-          </Container>
+                <Button
+                  bgColor={`primary.500`}
+                  color={`white`}
+                  _hover={{
+                    bgColor: `surface`,
+                    color: `primary.500`,
+                    border: `1px`,
+                  }}
+                >
+                  Download Report
+                </Button>
 
-          <Flex
-            gap={`28px`}
-            justifyContent={`center`}
-            width={`full`}
-            py={`24px`}
-          >
-            <Button
-              bgColor={`primary.500`}
-              color={`white`}
-              _hover={{
-                bgColor: `surface`,
-                color: `primary.500`,
-                border: `1px`,
-              }}
-            >
-              Download Report
-            </Button>
-
-            <Button
-              variant={`outline`}
-              bgColor={`surface`}
-              borderColor={`primary.500`}
-              color={`primary.500`}
-              _hover={{
-                bgColor: `primary.600`,
-                color: `white`,
-                border: `1px`,
-              }}
-            >
-              Share Data
-            </Button>
-          </Flex>
+                <Button
+                  variant={`outline`}
+                  bgColor={`surface`}
+                  borderColor={`primary.500`}
+                  color={`primary.500`}
+                  _hover={{
+                    bgColor: `primary.600`,
+                    color: `white`,
+                    border: `1px`,
+                  }}
+                >
+                  Share Data
+                </Button>
+              </Flex>
+            </VStack>
+          )}
         </VStack>
       )}
     </Box>
