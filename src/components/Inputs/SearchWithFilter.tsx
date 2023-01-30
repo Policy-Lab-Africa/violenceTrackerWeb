@@ -5,6 +5,7 @@ import {
   InputRightElement,
   Box,
   useDisclosure,
+  Container,
 } from '@chakra-ui/react';
 import React from 'react';
 import { DateRange } from 'react-date-range';
@@ -14,7 +15,7 @@ export default function SearchWithFilter() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box width={`full`} position={`relative`}>
+    <Container maxWidth={[`sm`, `md`]} width={`full`} position={`relative`}>
       <InputGroup my={`16px`}>
         <InputLeftElement
           fontSize={`2xl`}
@@ -57,6 +58,6 @@ export default function SearchWithFilter() {
           onChange={(date) => console.log(date)}
         />
       </Box>
-    </Box>
+    </Container>
   );
 }

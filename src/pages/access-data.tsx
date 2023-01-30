@@ -1,14 +1,9 @@
 import { AnimatedBox } from '@/components/Animated';
 import {
-  ChevronLeftIcon,
   ChevronRightIcon,
-  FilterIcon,
   ReportIcon,
   SearchIconOutline,
 } from '@/components/Icons';
-import ArrowRight from '@/components/Icons/ArrowRight';
-import BallotBoxIcon from '@/components/Icons/BallotBoxIcon';
-import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
 import {
   Box,
@@ -16,12 +11,10 @@ import {
   Container,
   Flex,
   Heading,
-  HStack,
   Input,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { count } from 'console';
 import { useState } from 'react';
 
 type ValidState = `idle` | `loading` | `failed` | `completed` | `download`;
@@ -51,8 +44,16 @@ const currentReport: Report = {
 };
 
 export default function AccessData() {
-  const [pageState, setPageState] = useState<ValidState>(`download`);
-  const [report, setReport] = useState<Report>(currentReport);
+  const [pageState, setPageState] = useState<ValidState>(`idle`);
+  const [report, setReport] = useState<Report>();
+
+  const downloadReport = () => {
+    setPageState(`download`);
+  };
+
+  const sendToEmail = () => {
+    setPageState(`completed`);
+  };
 
   return (
     <Box
@@ -61,7 +62,7 @@ export default function AccessData() {
       backgroundSize={`cover`}
       minHeight={`90vh`}
     >
-      {false && (
+      {pageState == `idle` && (
         <VStack px={[`1rem`, `6rem`]} py={`5rem`} alignItems={`start`}>
           <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
             Access Data
@@ -202,6 +203,7 @@ export default function AccessData() {
                   color: `primary.500`,
                   border: `1px`,
                 }}
+                onClick={sendToEmail}
               >
                 Download Report
               </Button>
@@ -271,6 +273,7 @@ export default function AccessData() {
                     color: `primary.500`,
                     border: `1px`,
                   }}
+                  onClick={downloadReport}
                 >
                   Download Report
                 </Button>
