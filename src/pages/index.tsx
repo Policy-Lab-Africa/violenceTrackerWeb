@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 import { ST } from 'next/dist/shared/lib/utils';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const HeroCTA = () => {
@@ -37,7 +38,7 @@ const HeroCTA = () => {
         }}
         transition=".5s"
       >
-        Report Voilence
+        <Link href={`report-violence`}>Report Voilence</Link>
       </Button>
       <Button
         onMouseEnter={() => setShouldSwitch(true)}
@@ -53,7 +54,7 @@ const HeroCTA = () => {
         }}
         transition=".5s"
       >
-        Access Data
+        <Link href={`access-data`}>Access Data</Link>
       </Button>
     </>
   );

@@ -11,6 +11,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion, useMotionValue } from 'framer-motion';
+import Link from 'next/link';
 import { useState } from 'react';
 import { NextChakraImage } from '../Images/NextChakraImage';
 import MarqueeHeader from './MarqueeHeader';
@@ -25,9 +26,11 @@ interface NavItemData {
 const NAV_ITEM: NavItemData[] = [
   {
     label: `About`,
+    href: `/about`,
   },
   {
     label: `Data`,
+    href: `/access-data`,
   },
 ];
 
@@ -57,7 +60,7 @@ const NavItem = ({ item }: { item: NavItemData }) => {
           transition: `0.2s`,
         }}
       >
-        {item.label}
+        <Link href={item.href ?? `#`}>{item.label}</Link>
       </Text>
     </Box>
   );
@@ -122,12 +125,14 @@ export default function Header() {
         >
           {/* Logo */}
           <Flex>
-            <NextChakraImage
-              src={`/assets/Logo/voilence-tracker.svg`}
-              alt="Voilence Tracker Logo"
-              width={`126`}
-              height={`66`}
-            />
+            <Link href={`/`}>
+              <NextChakraImage
+                src={`/assets/Logo/voilence-tracker.svg`}
+                alt="Voilence Tracker Logo"
+                width={`126`}
+                height={`66`}
+              />
+            </Link>
           </Flex>
 
           {/* Desktop Nav */}
@@ -143,10 +148,11 @@ export default function Header() {
                   color: `primary.500`,
                   border: `1px`,
                 }}
+                borderWidth="1px"
                 color={`white`}
                 bgColor={`primary.500`}
               >
-                Report Violence
+                <Link href={`report-violence`}>Report Violence</Link>
               </Button>
             </Stack>
           </Flex>
