@@ -15,6 +15,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 type ValidState = `idle` | `loading` | `failed` | `completed` | `download`;
@@ -55,6 +56,14 @@ export default function AccessData() {
     setPageState(`completed`);
   };
 
+  const search = () => {
+    setPageState(`loading`);
+    const t = setTimeout(() => {
+      setReport(currentReport);
+      clearTimeout(t);
+    }, 2000);
+  };
+
   return (
     <Box
       backgroundImage={`/assets/images/map-bg.svg`}
@@ -62,7 +71,7 @@ export default function AccessData() {
       backgroundSize={`cover`}
       minHeight={`90vh`}
     >
-      {pageState == `idle` && (
+      {!report && (
         <VStack px={[`1rem`, `6rem`]} py={`5rem`} alignItems={`start`}>
           <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
             Access Data
@@ -93,6 +102,7 @@ export default function AccessData() {
                   color: `primary.500`,
                   border: `1px`,
                 }}
+                onClick={search}
               >
                 Search
               </Button>
@@ -164,7 +174,7 @@ export default function AccessData() {
                 fontWeight={`semibold`}
                 color={`primary.500`}
               >
-                View Reports{` `}
+                <Link href={`reports`}>View Reports{` `}</Link>
               </Text>
               <ChevronRightIcon
                 display={`inline`}

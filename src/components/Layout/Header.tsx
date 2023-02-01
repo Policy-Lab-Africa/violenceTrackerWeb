@@ -10,7 +10,7 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import { isValidMotionProp, motion, useMotionValue } from 'framer-motion';
+import { isValidMotionProp, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 import { NextChakraImage } from '../Images/NextChakraImage';

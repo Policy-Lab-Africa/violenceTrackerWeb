@@ -1,27 +1,16 @@
+import { chakra, shouldForwardProp } from '@chakra-ui/react';
 import { BiFilter } from 'react-icons/bi';
+import { FaRegPlayCircle, FaShare, FaStop, FaVideo } from 'react-icons/fa';
+import { FiBox } from 'react-icons/fi';
 import {
-  MdCancel,
   MdCheck,
   MdChevronLeft,
   MdChevronRight,
   MdOutlineSearch,
-  MdOutlineShare,
-  MdShare,
 } from 'react-icons/md';
-import { FiBox, FiShare } from 'react-icons/fi';
-import {
-  FaPlayCircle,
-  FaRecordVinyl,
-  FaRegPlayCircle,
-  FaShare,
-  FaStop,
-  FaVideo,
-} from 'react-icons/fa';
-import { TiCancel, TiCancelOutline, TiTimes } from 'react-icons/ti';
-import { chakra, shouldForwardProp } from '@chakra-ui/react';
+import { TiTimes } from 'react-icons/ti';
 import DangerIcon from './DangerIcon';
 import XMark from './XMark';
-import { isValidMotionProp } from 'framer-motion';
 
 export const SearchIconOutline = chakra(MdOutlineSearch, {
   shouldForwardProp: (prop) => shouldForwardProp(prop),

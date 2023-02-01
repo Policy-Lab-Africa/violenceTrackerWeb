@@ -1,6 +1,6 @@
 import { AnimatedHeading, AnimatedText } from '@/components/Animated';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
-import { Container, Stack, Text, VStack } from '@chakra-ui/react';
+import { Container, Stack, VStack } from '@chakra-ui/react';
 
 export default function About() {
   return (

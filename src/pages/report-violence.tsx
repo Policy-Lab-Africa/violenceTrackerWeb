@@ -1,3 +1,4 @@
+import { AttachmentIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import {
   Button,
   Container,
@@ -10,7 +11,6 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react';
-import { CheckIcon, TriangleDownIcon, AttachmentIcon } from '@chakra-ui/icons';
 
 export default function ReportViolence() {
   return (

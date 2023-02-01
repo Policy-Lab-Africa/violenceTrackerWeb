@@ -1,13 +1,12 @@
 import {
+  Box,
+  Container,
+  Input,
   InputGroup,
   InputLeftElement,
-  Input,
   InputRightElement,
-  Box,
   useDisclosure,
-  Container,
 } from '@chakra-ui/react';
-import React from 'react';
 import { DateRange } from 'react-date-range';
 import { FilterIcon, SearchIconOutline } from '../Icons';
 

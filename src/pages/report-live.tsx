@@ -1,40 +1,6 @@
-import { AnimatedBox } from '@/components/Animated';
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DislikeIcon,
-  FilterIcon,
-  LikeIcon,
-  RecordIcon,
-  ReportIcon,
-  SearchIconOutline,
-  ShareIcon,
-} from '@/components/Icons';
-import ArrowRight from '@/components/Icons/ArrowRight';
-import BallotBoxIcon from '@/components/Icons/BallotBoxIcon';
-import DangerIcon from '@/components/Icons/DangerIcon';
-import Dislike from '@/components/Icons/Dislike';
-import XMark from '@/components/Icons/XMark';
-import { NextChakraImage } from '@/components/Images/NextChakraImage';
-import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
 import Recorder from '@/components/Twitter/Recorder';
-import Tweet from '@/components/Twitter/Tweet';
 import Video from '@/components/Twitter/Video';
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Center,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Input,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { count } from 'console';
-import { useState } from 'react';
+import { Box, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 
 type ValidState = `idle` | `loading` | `failed` | `completed` | `download`;
 

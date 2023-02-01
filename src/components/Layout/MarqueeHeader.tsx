@@ -1,4 +1,4 @@
-import { chakra, Stack, Text, Icon } from '@chakra-ui/react';
+import { chakra, Stack, Text } from '@chakra-ui/react';
 import Marquee from 'react-fast-marquee';
 import DangerIcon from '../Icons/DangerIcon';
 

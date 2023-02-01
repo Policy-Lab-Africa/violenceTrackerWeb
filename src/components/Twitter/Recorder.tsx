@@ -1,5 +1,4 @@
 import { AspectRatio, Box, Button, Center, Text } from '@chakra-ui/react';
-import React from 'react';
 import { RecordIcon, StopRecordIcon } from '../Icons';
 
 export default function Recorder() {

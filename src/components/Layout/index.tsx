@@ -1,8 +1,7 @@
 import { Box } from '@chakra-ui/react';
-import Header from './Header';
-import Footer from './Footer';
 import Head from 'next/head';
-import MarqueeHeader from './MarqueeHeader';
+import Footer from './Footer';
+import Header from './Header';
 
 export default function Layout({ children }: { children: JSX.Element }) {
   return (

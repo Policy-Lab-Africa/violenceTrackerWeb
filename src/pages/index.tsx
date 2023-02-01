@@ -1,4 +1,3 @@
-import MapDirection from '@/components/Icons/MapDirection';
 import XMark from '@/components/Icons/XMark';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import {
@@ -9,14 +8,12 @@ import {
   Container,
   Flex,
   Heading,
-  HStack,
   shouldForwardProp,
   Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
-import { ST } from 'next/dist/shared/lib/utils';
 import Link from 'next/link';
 import { useState } from 'react';
 

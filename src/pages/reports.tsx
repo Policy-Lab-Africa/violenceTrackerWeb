@@ -1,61 +1,6 @@
-import { AnimatedBox } from '@/components/Animated';
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DislikeIcon,
-  FilterIcon,
-  LikeIcon,
-  ReportIcon,
-  SearchIconOutline,
-  ShareIcon,
-} from '@/components/Icons';
-import ArrowRight from '@/components/Icons/ArrowRight';
-import BallotBoxIcon from '@/components/Icons/BallotBoxIcon';
-import DangerIcon from '@/components/Icons/DangerIcon';
-import Dislike from '@/components/Icons/Dislike';
-import XMark from '@/components/Icons/XMark';
-import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
 import Tweet from '@/components/Twitter/Tweet';
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Heading,
-  HStack,
-  Input,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { count } from 'console';
-import { useState } from 'react';
-
-type ValidState = `idle` | `loading` | `failed` | `completed` | `download`;
-
-interface UnitReport {
-  count: number;
-  description: string;
-  icon: string;
-}
-interface Report {
-  title: string;
-  summary: string;
-  data: UnitReport[];
-}
-
-const currentReport: Report = {
-  title: `Edo State`,
-  summary: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Id animi placeat repudiandae libero nisi, hic perspiciatis. Veritatis eos architecto dignissimos atque nulla vel eligendi repellat, reprehenderit deleniti quos ducimus. Magni.`,
-  data: [
-    { count: 7, description: `Voilence in :x: LGA`, icon: `violence` },
-    { count: 30, description: `:x: Ballot Boxes Snatched`, icon: `violence` },
-    { count: 5000, description: `Approx. :x: Injured`, icon: `violence` },
-    { count: 3, description: `:x: Group Clash Incidence`, icon: `violence` },
-    { count: 200, description: `Approx. :x: Killed`, icon: `violence` },
-    { count: 7, description: `:x: Sexual Violence Cases`, icon: `violence` },
-  ],
-};
+import { Box, Container, Flex, Heading, VStack } from '@chakra-ui/react';
 
 export default function Reports() {
   return (

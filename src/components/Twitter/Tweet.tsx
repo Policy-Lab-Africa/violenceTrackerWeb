@@ -1,5 +1,4 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
 import { DislikeIcon, LikeIcon, ShareIcon } from '../Icons';
 
 export default function Tweet() {
