@@ -148,7 +148,7 @@ export default function Home() {
         >
           {/* Desktop Image */}
           <NextChakraImage
-            src={`@/public/assets/images/see-omething-say-something.png`}
+            src={`/assets/images/see-omething-say-something.png`}
             alt="See something, Say something."
             width={`900`}
             height={`450`}
