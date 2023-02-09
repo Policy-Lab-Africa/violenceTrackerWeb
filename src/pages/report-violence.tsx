@@ -21,6 +21,7 @@ import {
   InputRightElement,
   Text,
   Textarea,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { Formik, FormikHelpers } from 'formik';
@@ -87,6 +88,7 @@ export default function ReportViolence() {
   const [selectedWard, setSelectedWard] = useState<OptionValue>();
   // const [selectedPU, setSelectedPU] = useState<OptionValue>();
   const violenceEvidence = useRef<HTMLInputElement>(null);
+  const toast = useToast();
 
   const { status: statesStatus, data: states } = useQuery(
     `states`,
@@ -167,12 +169,28 @@ export default function ReportViolence() {
           variables,
           context,
         );
+
+        toast({
+          title: `Oops! `,
+          description: `Something went wrong. You can try again.`,
+          status: `error`,
+          duration: 9000,
+          isClosable: true,
+        });
       },
       onSuccess: (data, variables, context) => {
         if (violenceEvidence.current) {
           violenceEvidence.current.value = ``;
         }
         resetForm();
+
+        toast({
+          title: `Great one 👍🏾! `,
+          description: `Your report has been recorded successfully.`,
+          status: `success`,
+          duration: 9000,
+          isClosable: true,
+        });
       },
     });
   };
