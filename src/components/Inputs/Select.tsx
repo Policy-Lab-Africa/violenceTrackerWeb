@@ -31,11 +31,13 @@ export default function ChakraReactSelect(props: StateManagerProps) {
           ...provided,
           color: `secondary.700`,
           fontSize: `sm`,
+          textTransform: `capitalize`,
         }),
         input: (provided) => ({
           ...provided,
           color: `secondary.700`,
           fontSize: `sm`,
+          textTransform: `capitalize`,
         }),
         indicatorsContainer: (provided) => ({
           ...provided,
@@ -46,6 +48,12 @@ export default function ChakraReactSelect(props: StateManagerProps) {
           fontSize: `sm`,
           fontWeight: `semibold`,
           color: `secondary.700`,
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          fontSize: `sm`,
+          fontWeight: `semibold`,
+          textTransform: `capitalize`,
         }),
         // menuList: (provided) => ({
         //   ...provided,
