@@ -9,13 +9,11 @@ import {
   submitViolentReport,
 } from '@/app/services/violence-report';
 import ChakraReactSelect from '@/components/Inputs/Select';
-import { AttachmentIcon, TriangleDownIcon } from '@chakra-ui/icons';
+import { AttachmentIcon } from '@chakra-ui/icons';
 import {
   Button,
   Container,
   FormControl,
-  FormErrorMessage,
-  FormLabel,
   Heading,
   Input,
   InputGroup,
@@ -24,10 +22,9 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import { useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { ref } from 'yup';
 
 interface ReportViolenceForm {
   ng_state_id: OptionValue | null;
