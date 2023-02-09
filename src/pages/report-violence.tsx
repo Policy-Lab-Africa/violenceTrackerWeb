@@ -14,6 +14,7 @@ import {
   Button,
   Container,
   FormControl,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
@@ -25,6 +26,7 @@ import {
 import { Formik, FormikHelpers } from 'formik';
 import { useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
+import * as Yup from 'yup';
 
 interface ReportViolenceForm {
   ng_state_id: OptionValue | null;
@@ -51,6 +53,33 @@ const initialValues: ReportViolenceForm = {
   type_id: null,
   file: null,
 };
+
+const ReportViolenceValidation = Yup.object().shape({
+  description: Yup.string()
+    .required()
+    .min(10, `Too Short!`)
+    .max(1000, `Too Long!`)
+    .label(`Description`),
+  hashtags: Yup.string()
+    .optional()
+    .min(2, `Too Short!`)
+    .max(60, `Too Long!`)
+    .label(`Hash Tags`),
+  ng_state_id: Yup.mixed().required(`Please select your state`).label(`State`),
+  ng_local_government_id: Yup.mixed()
+    .required(`Please select your LGA`)
+    .label(`LGA`),
+  ng_polling_unit_id: Yup.mixed()
+    .required(`Please select your Polling Unit`)
+    .label(`Polling Unit`),
+  ng_ward_id: Yup.mixed().required(`Please select your Ward`).label(`Ward`),
+  type_id: Yup.mixed()
+    .required(`Select the type of violence`)
+    .label(`Violence Type`),
+  file: Yup.mixed()
+    .required(`Video/Picture evidence is required`)
+    .label(`Evidence`),
+});
 
 export default function ReportViolence() {
   const [selectedState, setSelectedState] = useState<OptionValue>();
@@ -165,7 +194,11 @@ export default function ReportViolence() {
         No Registration or Personal Data is Required
       </Text>
 
-      <Formik initialValues={initialValues} onSubmit={handleSubmission}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmission}
+        validationSchema={ReportViolenceValidation}
+      >
         {({
           values,
           errors,
@@ -174,7 +207,6 @@ export default function ReportViolence() {
           setFieldValue,
           handleBlur,
           handleSubmit,
-          isSubmitting,
         }) => (
           <form onSubmit={handleSubmit} style={{ width: `100%` }}>
             <Container
@@ -204,6 +236,7 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.ng_state_id}
                 />
+                <FormErrorMessage>{errors.ng_state_id}</FormErrorMessage>
               </FormControl>
 
               <FormControl
@@ -229,9 +262,15 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.ng_local_government_id}
                 />
+                <FormErrorMessage>
+                  {errors.ng_local_government_id}
+                </FormErrorMessage>
               </FormControl>
 
-              <FormControl my={`8px`}>
+              <FormControl
+                my={`8px`}
+                isInvalid={!!errors[`ng_ward_id`] && touched[`ng_ward_id`]}
+              >
                 <ChakraReactSelect
                   size={`lg`}
                   placeholder={`Select Ward`}
@@ -247,6 +286,7 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.ng_ward_id}
                 />
+                <FormErrorMessage>{errors.ng_ward_id}</FormErrorMessage>
               </FormControl>
 
               <FormControl
@@ -271,6 +311,7 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.ng_polling_unit_id}
                 />
+                <FormErrorMessage>{errors.ng_polling_unit_id}</FormErrorMessage>
               </FormControl>
 
               <FormControl
@@ -292,6 +333,7 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.type_id}
                 />
+                <FormErrorMessage>{errors.type_id}</FormErrorMessage>
               </FormControl>
 
               <FormControl
@@ -317,6 +359,7 @@ export default function ReportViolence() {
                     <AttachmentIcon color="green.500" />
                   </InputRightElement>
                 </InputGroup>
+                <FormErrorMessage>{errors.file}</FormErrorMessage>
               </FormControl>
 
               <FormControl
@@ -335,6 +378,7 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.description}
                 />
+                <FormErrorMessage>{errors.description}</FormErrorMessage>
               </FormControl>
 
               <FormControl
@@ -354,6 +398,7 @@ export default function ReportViolence() {
                   onBlur={handleBlur}
                   value={values.hashtags}
                 />
+                <FormErrorMessage>{errors.hashtags}</FormErrorMessage>
               </FormControl>
 
               <Button
