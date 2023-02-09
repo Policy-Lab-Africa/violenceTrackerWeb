@@ -102,6 +102,7 @@ export default function ReportViolence() {
 
   const { status: lgasStatus, data: lgas } = useQuery(
     [`lgas`, selectedState],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     () => fetchLGAs(selectedState!.value),
     {
       enabled: !!selectedState,
@@ -110,6 +111,7 @@ export default function ReportViolence() {
 
   const { status: wardsStatus, data: wards } = useQuery(
     [`wards`, selectedLGA],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     () => fetchWards(selectedLGA!.value),
     {
       enabled: !!selectedLGA,
@@ -118,6 +120,7 @@ export default function ReportViolence() {
 
   const { status: pusStatus, data: pus } = useQuery(
     [`pus`, selectedWard],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     () => fetchPollingUnits(selectedWard!.value),
     {
       enabled: !!selectedWard,
@@ -178,7 +181,7 @@ export default function ReportViolence() {
           isClosable: true,
         });
       },
-      onSuccess: (data, variables, context) => {
+      onSuccess: () => {
         if (violenceEvidence.current) {
           violenceEvidence.current.value = ``;
         }
