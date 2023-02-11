@@ -24,6 +24,7 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 import { Formik, FormikHelpers } from 'formik';
 import { useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
@@ -165,17 +166,11 @@ export default function ReportViolence() {
 
     reportViolenceSubmiter.mutate(formData, {
       onError: (error, variables, context) => {
-        // An error happened!
-        console.log(
-          `rolling back optimistic update with `,
-          error,
-          variables,
-          context,
-        );
+        const e = error as AxiosError<{ message: string }>;
 
         toast({
           title: `Oops! `,
-          description: `Something went wrong. You can try again.`,
+          description: `${e.response?.data.message}`,
           status: `error`,
           duration: 9000,
           isClosable: true,
@@ -365,6 +360,7 @@ export default function ReportViolence() {
                   <Input
                     ref={violenceEvidence}
                     type={`file`}
+                    accept={`jpeg,jpg, png, gif`}
                     size={`lg`}
                     bgColor={`white`}
                     color={`secondary.700`}

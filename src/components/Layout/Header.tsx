@@ -29,6 +29,10 @@ const NAV_ITEM: NavItemData[] = [
     href: `/about`,
   },
   {
+    label: `Reports`,
+    href: `/reports`,
+  },
+  {
     label: `Data`,
     href: `/access-data`,
   },
