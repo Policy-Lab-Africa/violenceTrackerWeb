@@ -1,18 +1,17 @@
-import { chakra, Stack, Text } from '@chakra-ui/react';
+import { fetchViolenceReports } from '@/app/services/violence-report';
+import { chakra, Skeleton, Stack, Text } from '@chakra-ui/react';
+import { report } from 'process';
 import Marquee from 'react-fast-marquee';
+import { useQuery } from 'react-query';
 import DangerIcon from '../Icons/DangerIcon';
 
 const CMarquee = chakra(Marquee);
 
-const HEADLINES = [
-  `Ballot Boxes Snatched in 7 Places`,
-  `Groups Clash in Edo Local Government Area`,
-  `INEC Official Kiddnapped in Inewi LGA`,
-  `Tension in Kogi as Election Official Bribed to Shut up`,
-  `Ballot Boxes Snatched in 7 Places`,
-];
-
 export default function MarqueeHeader() {
+  const { data: reports, isLoading } = useQuery(`headlines`, () =>
+    fetchViolenceReports(10),
+  );
+
   return (
     <Stack
       direction={`row`}
@@ -40,11 +39,12 @@ export default function MarqueeHeader() {
         </Text>
       </Stack>
       <CMarquee color={`white`} gradient={false}>
-        {HEADLINES.map((headline, index) => (
-          <Text fontSize={`md`} key={`headline-${index}`} pr="8px">
-            {headline}...
-          </Text>
-        ))}
+        {reports &&
+          reports.map((report, index) => (
+            <Text fontSize={`md`} key={`headline-${index}`} pr="8px">
+              {report.description.substring(0, 30)}...
+            </Text>
+          ))}
       </CMarquee>
     </Stack>
   );

@@ -165,7 +165,7 @@ export default function ReportViolence() {
     formData.append(`file`, values.file);
 
     reportViolenceSubmiter.mutate(formData, {
-      onError: (error, variables, context) => {
+      onError: (error) => {
         const e = error as AxiosError<{ message: string }>;
 
         toast({

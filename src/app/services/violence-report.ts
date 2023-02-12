@@ -1,4 +1,9 @@
-import { ViolenceReport, ViolenceTrackerResponse, ViolenceType } from '@/types';
+import {
+  PaginatedReponse,
+  ViolenceReport,
+  ViolenceTrackerResponse,
+  ViolenceType,
+} from '@/types';
 import { axiosClient } from '../client';
 
 // interface ViolencReportRequestData {
@@ -20,20 +25,33 @@ export const fetchViolenceTypes = async (): Promise<ViolenceType[]> => {
   ).data.data.types;
 };
 
-export const fetchViolenceReports = async () => {
-  return await axiosClient.get(`/violence-reports?limit=100`);
+export const fetchViolenceReports = async (
+  limit: number,
+): Promise<ViolenceReport[]> => {
+  const limitQuery = !!limit ? `?limit=${limit}&` : `?`;
+
+  return (
+    await axiosClient.get<
+      ViolenceTrackerResponse<{ violence_reports: { data: ViolenceReport[] } }>
+    >(`/violence-reports${limitQuery}`)
+  ).data.data.violence_reports.data;
 };
 
-export const submitViolentReport = async (
-  data: FormData,
-): Promise<ViolenceReport> => {
+export const fetchInfiniteViolenceReports = async ({
+  limit,
+  pageParam,
+}: {
+  limit?: number;
+  pageParam?: number;
+}): Promise<PaginatedReponse<ViolenceReport[]>> => {
+  const limitQuery = !!limit ? `?limit=${limit}&` : `?`;
+  const pageQuery = !!pageParam ? `page=${pageParam}` : ``;
+
   return (
-    await axiosClient.post<
-      ViolenceTrackerResponse<{ violence_report: ViolenceReport }>
-    >(`/violence-reports?limit=100`, data, {
-      headers: {
-        'Content-Type': `multipart/form-data`,
-      },
-    })
-  ).data.data.violence_report;
+    await axiosClient.get<
+      ViolenceTrackerResponse<{
+        violence_reports: PaginatedReponse<ViolenceReport[]>;
+      }>
+    >(`/violence-reports${limitQuery}${pageQuery}`)
+  ).data.data.violence_reports;
 };

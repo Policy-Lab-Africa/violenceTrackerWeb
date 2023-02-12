@@ -41,14 +41,15 @@ export default function SearchWithFilter() {
       <Box
         display={isOpen ? `block` : `none`}
         position={`absolute`}
-        zIndex={`2`}
         mt={`-16px`}
+        height={`300px`}
+        zIndex={`99999999999`}
+        width="full"
       >
         <DateRange
-          showPreview={false}
           ranges={[
             {
-              startDate: new Date(`01-01-2023`),
+              startDate: new Date(`002-09-2023`),
               endDate: new Date(),
               key: `selection`,
             },
