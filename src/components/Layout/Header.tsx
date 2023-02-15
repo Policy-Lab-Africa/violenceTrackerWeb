@@ -109,7 +109,7 @@ export default function Header() {
   return (
     <AnimatedBox
       bgColor={`surface`}
-      zIndex="10"
+      zIndex={9}
       width={`full`}
       fontSize={`1rem`}
       position={`fixed`}

@@ -1,5 +1,7 @@
+import { SearchInputData } from '@/components/Inputs/SearchWithFilter';
 import {
   PaginatedReponse,
+  SearchResults,
   ViolenceReport,
   ViolenceTrackerResponse,
   ViolenceType,
@@ -54,4 +56,28 @@ export const fetchInfiniteViolenceReports = async ({
       }>
     >(`/violence-reports${limitQuery}${pageQuery}`)
   ).data.data.violence_reports;
+};
+
+export const submitViolentReport = async (data: FormData) => {
+  const response = await axiosClient.post<
+    ViolenceTrackerResponse<{ violence_report: ViolenceReport }>
+  >(`/violence-reports`, data, {
+    method: `post`,
+    headers: {
+      'Content-Type': `multipart/form-data`,
+      Accept: `application/json`,
+    },
+  });
+  return response.data.data.violence_report;
+};
+
+export const searchReports = async (
+  search?: SearchInputData,
+): Promise<SearchResults> => {
+  const sq = !search ? `q=Nigeria` : `q=${search.q}`;
+  const response = await axiosClient.get<
+    ViolenceTrackerResponse<SearchResults>
+  >(`/violence-reports/data?${sq}`);
+
+  return response.data.data;
 };

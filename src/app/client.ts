@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-  baseURL: `http://localhost:8000/api`,
+  baseURL: `https://dev.violencetrack.ng/api`,
   headers: {
     Accept: `application/json`,
     'Content-Type': `application/json`,

@@ -7,15 +7,34 @@ import {
   InputRightElement,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import { FilterIcon, SearchIconOutline } from '../Icons';
 
-export default function SearchWithFilter() {
+export interface SearchInputData {
+  q: string;
+  start?: Date;
+  end?: Date;
+}
+
+export interface SearchInputProps {
+  onChange?: (value: SearchInputData) => void;
+}
+
+export default function SearchWithFilter({ onChange }: SearchInputProps) {
   const { isOpen, onToggle } = useDisclosure();
+
+  const [q, setQ] = useState<string>(``);
+  const [start, setStart] = useState<Date | undefined>(new Date(`02-01-023`)); //M-d-Y
+  const [end, setEnd] = useState<Date | undefined>(new Date());
+
+  const sendDataOut = () => {
+    if (onChange) onChange({ q, start, end });
+  };
 
   return (
     <Container maxWidth={[`sm`, `md`]} width={`full`} position={`relative`}>
-      <InputGroup my={`16px`}>
+      <InputGroup mt={`16px`}>
         <InputLeftElement
           fontSize={`2xl`}
           top="3px"
@@ -33,8 +52,15 @@ export default function SearchWithFilter() {
           placeholder={`Search with State or LGA or Polling Unit`}
           size="lg"
           focusBorderColor="primary.500"
+          value={q}
+          onChange={(e) => setQ(e.currentTarget.value)}
         />
-        <InputRightElement fontSize={`2xl`} top="3px">
+        <InputRightElement
+          cursor={`pointer`}
+          onClick={sendDataOut}
+          fontSize={`2xl`}
+          top="3px"
+        >
           <SearchIconOutline color="primary.500" />
         </InputRightElement>
       </InputGroup>
@@ -49,13 +75,16 @@ export default function SearchWithFilter() {
         <DateRange
           ranges={[
             {
-              startDate: new Date(`002-09-2023`),
-              endDate: new Date(),
+              startDate: start,
+              endDate: end,
               key: `selection`,
             },
           ]}
           rangeColors={[`#228A78`]}
-          onChange={(date) => console.log(date)}
+          onChange={(date) => {
+            setStart(date.selection.startDate);
+            setEnd(date.selection.endDate);
+          }}
         />
       </Box>
     </Container>

@@ -7,6 +7,7 @@ export interface State {
   longitude?: string;
   created_at: string;
   updated_at: string;
+  polling_units?: PollingUnit[];
 }
 
 export interface LGA {
@@ -43,13 +44,15 @@ export interface PollingUnit {
   created_at: string;
   updated_at: string;
   location: Location;
+  violencereports?: ViolenceReport[];
+  local_government?: LGA;
 }
 
 export interface Location {
   id: number;
   ng_polling_unit_id: number;
-  latitude?: string;
-  longitude?: string;
+  latitude: string;
+  longitude: string;
   viewport?: string;
   formatted_address?: string;
   google_map_url?: string;
@@ -67,6 +70,7 @@ export interface ViolenceType {
 }
 
 export interface ViolenceReport {
+  id: number;
   ng_state_id: number;
   ng_local_government_id: number;
   ng_polling_unit_id: number;
@@ -80,7 +84,7 @@ export interface ViolenceReport {
   latitude: string;
   updated_at: string;
   created_at: string;
-  id: number;
+  type?: ViolenceType;
 }
 
 export type ViolenceTrackerResponse<T> = {
@@ -95,3 +99,66 @@ export type PaginatedReponse<T> = {
   last_page: number;
   per_page: number;
 };
+
+export interface SearchMetaData {
+  meta_data: {
+    violence_reports: {
+      count: number;
+    };
+    local_governments: {
+      count: number;
+    };
+    types: {
+      types: ViolenceType[];
+      count: number;
+    };
+  };
+}
+
+export interface StateSearchData {
+  data: State[];
+  meta_data: {
+    violence_reports: {
+      count: number;
+    };
+    polling_units: {
+      count: number;
+    };
+    local_governments: {
+      local_governments: LGA[];
+      count_unique: number;
+      count_reports?: any;
+    };
+    types: {
+      types: ViolenceType[];
+      count_unique: number;
+      count_reports?: any;
+    };
+  };
+}
+
+export interface LGASearchData {
+  data: LGA[];
+  meta_data: {
+    violence_reports: {
+      count: number;
+    };
+    local_governments: {
+      local_governments: LGA[];
+      count_unique: number;
+      count_reports?: any;
+    };
+    types: {
+      types: ViolenceType[];
+      count_unique: number;
+      count_reports?: any;
+    };
+  };
+}
+
+export interface SearchResults {
+  state_results: StateSearchData;
+  local_government_results: SearchMetaData;
+  ward_results: SearchMetaData;
+  polling_unit_results: SearchMetaData;
+}
