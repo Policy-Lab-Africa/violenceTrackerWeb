@@ -91,7 +91,7 @@ const ReportPDF = ({ data }: { data?: SearchResults }) => (
           flexGrow: 1,
           flexDirection: `row`,
           flexWrap: `wrap`,
-          rowGap: `64px`,
+          rowGap: 48,
           marginTop: 48,
         }}
       >
@@ -176,15 +176,6 @@ export default function AccessData() {
       },
     },
   );
-
-  const downloadReport = () => {
-    // setShowPDF(true);
-    // setPageState(`download`);
-  };
-
-  const sendToEmail = () => {
-    setPageState(`completed`);
-  };
 
   const handleSearchInput = (values: SearchInputData) => {
     if (!values.q) {
@@ -376,7 +367,6 @@ export default function AccessData() {
                   color: `primary.500`,
                   border: `1px`,
                 }}
-                onClick={sendToEmail}
               >
                 Download Report
               </Button>
@@ -457,7 +447,7 @@ export default function AccessData() {
                     fileName="violence_reports.pdf"
                     document={<ReportPDF data={report} />}
                   >
-                    {({ blob, url, loading, error }) =>
+                    {({ loading }) =>
                       loading ? `Loading document...` : `Download Pdf`
                     }
                   </PDFDownloadLink>
