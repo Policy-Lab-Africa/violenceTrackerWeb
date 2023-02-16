@@ -17,11 +17,27 @@ import {
   Flex,
   Heading,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Text,
   useToast,
   VStack,
 } from '@chakra-ui/react';
+import ReactPDF, {
+  Document,
+  Page,
+  PDFDownloadLink,
+  PDFViewer,
+  View,
+  Text as PDFText,
+  Image as PDFImage,
+} from '@react-pdf/renderer';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
@@ -39,6 +55,65 @@ interface Report {
   data: UnitReport[];
 }
 
+const ReportPDF = () => (
+  <Document>
+    <Page
+      size={`A4`}
+      style={{
+        flexDirection: `column`,
+        backgroundColor: `#F2F9F9`,
+        width: `100%`,
+      }}
+    >
+      <View
+        style={{
+          padding: 10,
+          backgroundColor: `#228A78`,
+        }}
+      >
+        <PDFText
+          style={{
+            fontSize: `24px`,
+            fontWeight: `bold`,
+            paddingVertical: `32px`,
+            textAlign: `center`,
+            color: `#ffffff`,
+          }}
+        >
+          EDO STATE ELECTION VIOLENCE DATA
+        </PDFText>
+      </View>
+
+      <View style={{ margin: 10, padding: 10, flexGrow: 1 }}></View>
+
+      <View
+        style={{
+          padding: 10,
+          backgroundColor: `#FFFFFF`,
+          paddingVertical: `32px`,
+          display: `flex`,
+          flexDirection: `row`,
+          justifyContent: `space-between`,
+        }}
+      >
+        <PDFImage
+          src="/assets/Logo/voilence-tracker.svg"
+          style={{ width: `24px`, height: `24px` }}
+        />
+        <PDFText
+          style={{
+            fontSize: `12px`,
+            fontWeight: `bold`,
+            color: `#228A78`,
+          }}
+        >
+          www.electionviolencetracker.ng
+        </PDFText>
+      </View>
+    </Page>
+  </Document>
+);
+
 export default function AccessData() {
   const [pageState, setPageState] = useState<ValidState>(`idle`);
   const [report, setReport] = useState<SearchResults>();
@@ -46,6 +121,7 @@ export default function AccessData() {
   const [makeSearch, setMakeSearch] = useState<boolean>(false);
   const toast = useToast();
   const [accessData, setAccessData] = useState<boolean>(false);
+  const [showPDF, setShowPDF] = useState<boolean>(false);
 
   const { isLoading } = useQuery(
     [`search`, search],
@@ -59,7 +135,8 @@ export default function AccessData() {
   );
 
   const downloadReport = () => {
-    setPageState(`download`);
+    // setShowPDF(true);
+    // setPageState(`download`);
   };
 
   const sendToEmail = () => {
@@ -288,19 +365,16 @@ export default function AccessData() {
                       alignItems={`center`}
                     >
                       <ReportIcon size={48} my={`12px`} />
-                      <Text fontSize={`sm`}>
-                        {/* {info.description.split(`:x:`)[0]} */}
-                        {Object.keys(info)[0]}
+                      <Text fontSize={`sm`} textTransform={`capitalize`}>
                         <Text
                           color="primary.500"
                           fontSize={`2xl`}
                           display={`inline`}
                         >
                           {info[Object.keys(info)[0]]}
-                          {/* {info.count} */}
+                          {` `}
                         </Text>
-                        {` String`}
-                        {/* {info.description.split(`:x:`)[1]} */}
+                        {Object.keys(info)[0]}
                       </Text>
                     </Flex>
                   ),
@@ -335,9 +409,15 @@ export default function AccessData() {
                     color: `primary.500`,
                     border: `1px`,
                   }}
-                  onClick={downloadReport}
                 >
-                  Download Report
+                  <PDFDownloadLink
+                    fileName="violence_reports.pdf"
+                    document={<ReportPDF />}
+                  >
+                    {({ blob, url, loading, error }) =>
+                      loading ? `Loading document...` : `Download Pdf`
+                    }
+                  </PDFDownloadLink>
                 </Button>
 
                 <Button
@@ -358,6 +438,22 @@ export default function AccessData() {
           )}
         </VStack>
       )}
+
+      <Modal onClose={() => setShowPDF(false)} size={`full`} isOpen={showPDF}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody width={`full`}>
+            <PDFViewer>
+              <ReportPDF />
+            </PDFViewer>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={() => setShowPDF(false)}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
