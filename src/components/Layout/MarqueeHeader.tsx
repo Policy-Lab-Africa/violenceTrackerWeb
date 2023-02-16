@@ -1,6 +1,5 @@
 import { fetchViolenceReports } from '@/app/services/violence-report';
-import { chakra, Skeleton, Stack, Text } from '@chakra-ui/react';
-import { report } from 'process';
+import { chakra, Stack, Text } from '@chakra-ui/react';
 import Marquee from 'react-fast-marquee';
 import { useQuery } from 'react-query';
 import DangerIcon from '../Icons/DangerIcon';
@@ -8,7 +7,7 @@ import DangerIcon from '../Icons/DangerIcon';
 const CMarquee = chakra(Marquee);
 
 export default function MarqueeHeader() {
-  const { data: reports, isLoading } = useQuery(`headlines`, () =>
+  const { data: reports } = useQuery(`headlines`, () =>
     fetchViolenceReports(10),
   );
 
@@ -35,7 +34,7 @@ export default function MarqueeHeader() {
           fontWeight={`bold`}
           whiteSpace="nowrap"
         >
-          Voilence Alert
+          Violence Alert
         </Text>
       </Stack>
       <CMarquee color={`white`} gradient={false}>

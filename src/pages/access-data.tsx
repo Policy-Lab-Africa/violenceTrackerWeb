@@ -1,6 +1,10 @@
 import { searchReports } from '@/app/services/violence-report';
 import { AnimatedBox } from '@/components/Animated';
-import { ChevronRightIcon, SearchIconOutline } from '@/components/Icons';
+import {
+  ChevronRightIcon,
+  ReportIcon,
+  SearchIconOutline,
+} from '@/components/Icons';
 import SearchWithFilter, {
   SearchInputData,
 } from '@/components/Inputs/SearchWithFilter';
@@ -35,25 +39,13 @@ interface Report {
   data: UnitReport[];
 }
 
-// const currentReport: Report = {
-//   title: `Edo State`,
-//   summary: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Id animi placeat repudiandae libero nisi, hic perspiciatis. Veritatis eos architecto dignissimos atque nulla vel eligendi repellat, reprehenderit deleniti quos ducimus. Magni.`,
-//   data: [
-//     { count: 7, description: `Voilence in :x: LGA`, icon: `violence` },
-//     { count: 30, description: `:x: Ballot Boxes Snatched`, icon: `violence` },
-//     { count: 5000, description: `Approx. :x: Injured`, icon: `violence` },
-//     { count: 3, description: `:x: Group Clash Incidence`, icon: `violence` },
-//     { count: 200, description: `Approx. :x: Killed`, icon: `violence` },
-//     { count: 7, description: `:x: Sexual Violence Cases`, icon: `violence` },
-//   ],
-// };
-
 export default function AccessData() {
   const [pageState, setPageState] = useState<ValidState>(`idle`);
   const [report, setReport] = useState<SearchResults>();
   const [search, setSearch] = useState<SearchInputData>();
   const [makeSearch, setMakeSearch] = useState<boolean>(false);
   const toast = useToast();
+  const [accessData, setAccessData] = useState<boolean>(false);
 
   const { isLoading } = useQuery(
     [`search`, search],
@@ -106,7 +98,8 @@ export default function AccessData() {
       backgroundSize={`cover`}
       minHeight={`90vh`}
     >
-      {true && (
+      {/* Stage 1 */}
+      {pageState == `idle` && !accessData && (
         <Stack direction={[`column`, `row`]} px={[`1rem`, `3rem`, `6rem`]}>
           <Box py={`5rem`} alignItems={`start`} width={[`100%`, `80%`]}>
             <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
@@ -116,7 +109,7 @@ export default function AccessData() {
               Download and Export Violence Data
             </Text>
 
-            {pageState == `idle` && (
+            {!isLoading && (
               <Container
                 maxWidth={[`sm`, `lg`]}
                 height={`full`}
@@ -147,13 +140,15 @@ export default function AccessData() {
                   }}
                   disabled={!report}
                   isLoading={isLoading}
+                  onClick={() => setAccessData(true)}
                 >
                   Access Data
                 </Button>
               </Container>
             )}
 
-            {pageState == `loading` && (
+            {/* Search Loader */}
+            {isLoading && (
               <Container
                 maxWidth={[`sm`, `lg`]}
                 height={`full`}
@@ -192,7 +187,8 @@ export default function AccessData() {
         </Stack>
       )}
 
-      {false && (
+      {/* Stage 2 */}
+      {accessData && (
         <VStack
           px={[`1rem`, `6rem`]}
           py={`5rem`}
@@ -205,9 +201,15 @@ export default function AccessData() {
             justifyContent={`space-between`}
             width={`full`}
           >
-            <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
-              EDO STATE ELECTION VIOLENCE DATA
+            <Heading
+              textTransform={`uppercase`}
+              fontSize={`2xl`}
+              fontWeight={`bold`}
+              color={`primary.500`}
+            >
+              {report?.state_results.data[0].name} STATE ELECTION VIOLENCE DATA
             </Heading>
+
             <Flex direction={`row`} alignItems={`center`}>
               <Text
                 fontSize={`md`}
@@ -224,6 +226,7 @@ export default function AccessData() {
             </Flex>
           </Flex>
 
+          {/* 2 of 2 */}
           {pageState == `download` ? (
             <Container
               maxWidth={[`sm`, `lg`]}
@@ -260,6 +263,12 @@ export default function AccessData() {
             </Container>
           ) : (
             <VStack>
+              {/* 1 of 2 */}
+
+              <Box width={`full`} px={[`1rem`, `1rem`]} py={`5rem`}>
+                <VTMap data={report} />
+              </Box>
+
               <Container
                 display={`flex`}
                 maxWidth={`container.md`}
@@ -270,33 +279,36 @@ export default function AccessData() {
                 width="100%"
                 pt="56px"
               >
-                {/* {report.data.map((info, index) => (
-                  <Flex
-                    key={index}
-                    direction={`column`}
-                    width={`25%`}
-                    alignItems={`center`}
-                  >
-                    <ReportIcon size={48} my={`12px`} />
-                    <Text fontSize={`sm`}>
-                      {info.description.split(`:x:`)[0]}
-                      {` `}
-                      <Text
-                        color="primary.500"
-                        fontSize={`2xl`}
-                        display={`inline`}
-                      >
-                        {info.count}
+                {report?.state_results.meta_data.types.count_by_reports.map(
+                  (info, index) => (
+                    <Flex
+                      key={index}
+                      direction={`column`}
+                      width={`25%`}
+                      alignItems={`center`}
+                    >
+                      <ReportIcon size={48} my={`12px`} />
+                      <Text fontSize={`sm`}>
+                        {/* {info.description.split(`:x:`)[0]} */}
+                        {Object.keys(info)[0]}
+                        <Text
+                          color="primary.500"
+                          fontSize={`2xl`}
+                          display={`inline`}
+                        >
+                          {info[Object.keys(info)[0]]}
+                          {/* {info.count} */}
+                        </Text>
+                        {` String`}
+                        {/* {info.description.split(`:x:`)[1]} */}
                       </Text>
-                      {` `}
-                      {info.description.split(`:x:`)[1]}
-                    </Text>
-                  </Flex>
-                ))} */}
+                    </Flex>
+                  ),
+                )}
               </Container>
 
               <Container maxWidth={`container.md`} py={`56px`}>
-                <Text>
+                {/* <Text>
                   <Text
                     display={`inline`}
                     color={`primary.500`}
@@ -305,8 +317,8 @@ export default function AccessData() {
                     Data Summary:
                   </Text>
                   {` `}
-                  {/* {report.summary} */}
-                </Text>
+                  {report.summary}
+                </Text> */}
               </Container>
 
               <Flex

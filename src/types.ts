@@ -125,14 +125,14 @@ export interface StateSearchData {
       count: number;
     };
     local_governments: {
-      local_governments: LGA[];
+      data: LGA[];
       count_unique: number;
-      count_reports?: any;
+      count_reports: { [key: string]: number }[];
     };
     types: {
-      types: ViolenceType[];
+      data: ViolenceType[];
       count_unique: number;
-      count_reports?: any;
+      count_by_reports: { [key: string]: number }[];
     };
   };
 }
@@ -151,7 +151,7 @@ export interface LGASearchData {
     types: {
       types: ViolenceType[];
       count_unique: number;
-      count_reports?: any;
+      count_by_reports?: any;
     };
   };
 }
