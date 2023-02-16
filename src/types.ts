@@ -85,6 +85,7 @@ export interface ViolenceReport {
   updated_at: string;
   created_at: string;
   type?: ViolenceType;
+  polling_unit: PollingUnit;
 }
 
 export type ViolenceTrackerResponse<T> = {
