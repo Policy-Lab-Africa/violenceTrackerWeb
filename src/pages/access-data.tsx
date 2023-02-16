@@ -29,14 +29,14 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import ReactPDF, {
+import {
   Document,
+  Image as PDFImage,
   Page,
   PDFDownloadLink,
   PDFViewer,
-  View,
   Text as PDFText,
-  Image as PDFImage,
+  View,
 } from '@react-pdf/renderer';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -55,7 +55,7 @@ interface Report {
   data: UnitReport[];
 }
 
-const ReportPDF = () => (
+const ReportPDF = ({ data }: { data?: SearchResults }) => (
   <Document>
     <Page
       size={`A4`}
@@ -84,7 +84,50 @@ const ReportPDF = () => (
         </PDFText>
       </View>
 
-      <View style={{ margin: 10, padding: 10, flexGrow: 1 }}></View>
+      <View
+        style={{
+          margin: 10,
+          padding: 10,
+          flexGrow: 1,
+          flexDirection: `row`,
+          flexWrap: `wrap`,
+          rowGap: `64px`,
+          marginTop: 48,
+        }}
+      >
+        {data?.state_results.meta_data.types.count_by_reports.map(
+          (info, index) => (
+            <View
+              key={index}
+              style={{
+                width: `25%`,
+                display: `flex`,
+                flexDirection: `column`,
+                alignItems: `center`,
+              }}
+            >
+              {/* <ReportIcon size={48} my={`12px`} /> */}
+              <PDFImage
+                src="/assets/icons/Injured.svg"
+                style={{ width: 36, height: 36 }}
+              />
+              <PDFText style={{ fontSize: 12, textTransform: `capitalize` }}>
+                <PDFText
+                  style={{
+                    fontSize: 14,
+                    textTransform: `capitalize`,
+                    color: `#228A78`,
+                  }}
+                >
+                  {info[Object.keys(info)[0]]}
+                  {` `}
+                </PDFText>
+                {Object.keys(info)[0]}
+              </PDFText>
+            </View>
+          ),
+        )}
+      </View>
 
       <View
         style={{
@@ -412,7 +455,7 @@ export default function AccessData() {
                 >
                   <PDFDownloadLink
                     fileName="violence_reports.pdf"
-                    document={<ReportPDF />}
+                    document={<ReportPDF data={report} />}
                   >
                     {({ blob, url, loading, error }) =>
                       loading ? `Loading document...` : `Download Pdf`
