@@ -1,15 +1,6 @@
 import { SearchResults } from '@/types';
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import React, { useEffect, useState } from 'react';
-import {
-  MapContainer,
-  MapContainerProps,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-} from 'react-leaflet';
 
 const DynamicMap = dynamic(() => import(`./VisualizedMapReport`), {
   ssr: false,

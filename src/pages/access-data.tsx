@@ -1,14 +1,9 @@
 import { searchReports } from '@/app/services/violence-report';
 import { AnimatedBox } from '@/components/Animated';
-import {
-  ChevronRightIcon,
-  ReportIcon,
-  SearchIconOutline,
-} from '@/components/Icons';
+import { ChevronRightIcon, SearchIconOutline } from '@/components/Icons';
 import SearchWithFilter, {
   SearchInputData,
 } from '@/components/Inputs/SearchWithFilter';
-import VisualizedMapReport from '@/features/view-reports/VisualizedMapReport';
 import VTMap from '@/features/view-reports/VTMap';
 import { SearchResults } from '@/types';
 import {
@@ -23,7 +18,6 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react';
-import { is } from 'date-fns/locale';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
@@ -276,7 +270,7 @@ export default function AccessData() {
                 width="100%"
                 pt="56px"
               >
-                {report.data.map((info, index) => (
+                {/* {report.data.map((info, index) => (
                   <Flex
                     key={index}
                     direction={`column`}
@@ -298,7 +292,7 @@ export default function AccessData() {
                       {info.description.split(`:x:`)[1]}
                     </Text>
                   </Flex>
-                ))}
+                ))} */}
               </Container>
 
               <Container maxWidth={`container.md`} py={`56px`}>
@@ -311,7 +305,7 @@ export default function AccessData() {
                     Data Summary:
                   </Text>
                   {` `}
-                  {report.summary}
+                  {/* {report.summary} */}
                 </Text>
               </Container>
 

@@ -206,7 +206,7 @@ export default function Home() {
         </VStack>
         <VStack justifyContent={`flex-start`} height={[`full`]}>
           <Video
-            outlineColor={`primary.dark`}
+            // outlineColor={`primary.dark`}
             borderColor={`primary.dark`}
             borderWidth="4px"
             autoPlay
