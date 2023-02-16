@@ -35,7 +35,7 @@ export default function MarqueeHeader() {
           fontWeight={`bold`}
           whiteSpace="nowrap"
         >
-          Voilence Alert
+          Violence Alert
         </Text>
       </Stack>
       <CMarquee color={`white`} gradient={false}>
