@@ -25,7 +25,7 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
   const { isOpen, onToggle } = useDisclosure();
 
   const [q, setQ] = useState<string>(``);
-  const [start, setStart] = useState<Date | undefined>(new Date(`02-01-2023`)); //M-d-Y
+  const [start, setStart] = useState<Date | undefined>(new Date()); //M-d-Y
   const [end, setEnd] = useState<Date | undefined>(new Date());
 
   const sendDataOut = () => {
@@ -72,7 +72,7 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
         zIndex={`99999999999`}
         width="full"
       >
-        {/* <DateRange
+        <DateRange
           ranges={[
             {
               startDate: start,
@@ -85,7 +85,7 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
             setStart(date.selection.startDate);
             setEnd(date.selection.endDate);
           }}
-        /> */}
+        />
       </Box>
     </Container>
   );

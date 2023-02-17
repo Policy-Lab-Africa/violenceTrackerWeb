@@ -150,13 +150,11 @@ export default function Header() {
   return (
     <AnimatedBox
       bgColor={`surface`}
-      zIndex={9}
+      zIndex={999999}
       width={`full`}
       fontSize={`1rem`}
       position={`fixed`}
-      height={[`max-content`]}
-      overflow={`hidden`}
-      animate={isOpen ? { height: `100vh` } : { height: `max-content` }}
+      animate={isOpen ? { height: `100vh` } : { height: `unset` }}
     >
       <VStack width={`full`} height={[`100%`]}>
         {/* Main Nav Container */}
