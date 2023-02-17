@@ -3,7 +3,6 @@ import {
   Button,
   chakra,
   Flex,
-  Heading,
   shouldForwardProp,
   Stack,
   Text,
@@ -12,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { NextChakraImage } from '../Images/NextChakraImage';
 import MarqueeHeader from './MarqueeHeader';
 
@@ -70,6 +69,48 @@ const NavItem = ({ item }: { item: NavItemData }) => {
   );
 };
 
+const MobileNavItem = ({
+  item,
+  onClick,
+}: {
+  item: NavItemData;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+}) => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Box
+      cursor={`pointer`}
+      px={`4`}
+      py={`2`}
+      key={item.label}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <Text
+        position={`relative`}
+        fontWeight={`semibold`}
+        fontSize={`xl`}
+        _after={{
+          content: `""`,
+          position: `absolute`,
+          bottom: 0,
+          right: hovered ? `0%` : `100%`,
+          left: 0,
+          top: `100%`,
+          height: `4px`,
+          bgColor: `primary.600`,
+          borderRadius: 4,
+          transition: `0.2s`,
+        }}
+      >
+        <Link onClick={onClick} href={item.href ?? `#`}>
+          {item.label}
+        </Link>
+      </Text>
+    </Box>
+  );
+};
+
 const AnimatedBox = chakra(motion.div, {
   /**
    * Allow motion props and non-Chakra props to be forwarded.
@@ -114,10 +155,10 @@ export default function Header() {
       fontSize={`1rem`}
       position={`fixed`}
       height={[`max-content`]}
-      // overflow={`hidden`}
+      overflow={`hidden`}
       animate={isOpen ? { height: `100vh` } : { height: `max-content` }}
     >
-      <VStack width={`full`}>
+      <VStack width={`full`} height={[`100%`]}>
         {/* Main Nav Container */}
         <Flex
           width={`full`}
@@ -204,18 +245,49 @@ export default function Header() {
 
         {/* Mobile Nav Container */}
         <Box
-          display={[`flex`, `none`]}
-          position={`relative`}
-          height={`full`}
+          display={isOpen ? [`flex`, `none`] : [`none`, `none`]}
+          // position={`relative`}
+          height={isOpen ? `100%` : `0%`}
           width={`full`}
         >
           <AnimatedBox
-            position={`absolute`}
-            bgColor="primary.500"
+            // position={`absolute`}
+            bgColor="primary.50"
             width={`full`}
             height={`full`}
+            top={0}
+            bottom={0}
+            display={`flex`}
+            alignItems="center"
+            justifyContent={`center`}
           >
-            <Heading>Our Mobile Navigation</Heading>
+            <Stack
+              direction={`column`}
+              alignItems="center"
+              justifyContent={`center`}
+              width={`full`}
+            >
+              {NAV_ITEM.map((item) => (
+                <MobileNavItem
+                  onClick={onToggle}
+                  item={item}
+                  key={item.label}
+                />
+              ))}
+
+              <Button
+                _hover={{
+                  bgColor: `surface`,
+                  color: `primary.500`,
+                  border: `1px`,
+                }}
+                borderWidth="1px"
+                color={`white`}
+                bgColor={`primary.500`}
+              >
+                <Link href={`report-violence`}>Report Violence</Link>
+              </Button>
+            </Stack>
           </AnimatedBox>
         </Box>
       </VStack>

@@ -1,6 +1,7 @@
 import { AnimatedHeading, AnimatedText } from '@/components/Animated';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import { Container, Stack, VStack } from '@chakra-ui/react';
+import Image from 'next/image';
 
 export default function About() {
   return (
@@ -56,12 +57,12 @@ export default function About() {
         </Container>
 
         <Container display={`flex`} justifyContent={`center`}>
-          <NextChakraImage
+          <Image
             src={`/assets/images/what-is-evt.png`}
             alt="What is the Election Violence Tracker (EVT)"
             width={`400`}
             height={`400`}
-            objectFit={`contain`}
+            style={{ objectFit: `contain` }}
           />
         </Container>
       </Stack>
