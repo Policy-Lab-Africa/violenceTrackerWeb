@@ -202,6 +202,21 @@ export default function AccessData() {
     handleSearch();
   }, [search]);
 
+  useEffect(() => {
+    if (report) {
+      if (!report.state_results.data[0]) {
+        setReport(undefined);
+        toast({
+          // title: `Hey! `,
+          description: `No state, lga, or polling unit matches your search.`,
+          status: `error`,
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    }
+  }, [report]);
+
   return (
     <Box
       backgroundImage={`/assets/images/map-bg.svg`}
@@ -251,7 +266,9 @@ export default function AccessData() {
                   }}
                   disabled={!report}
                   isLoading={isLoading}
-                  onClick={() => setAccessData(true)}
+                  onClick={() => {
+                    setAccessData(true);
+                  }}
                 >
                   Access Data
                 </Button>

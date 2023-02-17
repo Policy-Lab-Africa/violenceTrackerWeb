@@ -7,7 +7,7 @@ import {
   InputRightElement,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import { FilterIcon, SearchIconOutline } from '../Icons';
 
@@ -25,7 +25,7 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
   const { isOpen, onToggle } = useDisclosure();
 
   const [q, setQ] = useState<string>(``);
-  const [start, setStart] = useState<Date | undefined>(new Date(`02-01-023`)); //M-d-Y
+  const [start, setStart] = useState<Date | undefined>(new Date(`02-01-2023`)); //M-d-Y
   const [end, setEnd] = useState<Date | undefined>(new Date());
 
   const sendDataOut = () => {

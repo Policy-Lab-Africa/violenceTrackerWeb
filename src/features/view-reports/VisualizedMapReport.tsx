@@ -21,7 +21,6 @@ const iconPerson = new L.Icon({
   shadowSize: undefined,
   shadowAnchor: undefined,
   iconSize: new L.Point(24, 24),
-  className: `dleaflet-div-icon`,
 });
 
 export interface MapProps {
@@ -51,6 +50,10 @@ function SetBoundsRectangles({
     }),
     [map, top, btm],
   );
+
+  useEffect(() => {
+    map.fitBounds([top, btm]);
+  }, [top, btm, map]);
 
   return (
     <>
@@ -125,11 +128,6 @@ export default function VisualizedMapReport({ data }: MapProps) {
       const [[x, y], [X, Y]] = extractBounds(data);
       setMapTop({ lat: x, long: y });
       setMapBottom({ lat: X, long: Y });
-      console.log(`Drawing box`);
-      console.log(`Bounds`, [
-        [x, y],
-        [X, Y],
-      ]);
 
       mapRef.current?.fitBounds([
         [x, y],
