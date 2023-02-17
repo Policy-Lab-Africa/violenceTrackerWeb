@@ -58,7 +58,7 @@ export default function About() {
 
         <Container display={`flex`} justifyContent={`center`}>
           <Image
-            src={`/assets/images/what-is-evt.png`}
+            src={`/assets/about/what-is-evt.png`}
             alt="What is the Election Violence Tracker (EVT)"
             width={`400`}
             height={`400`}
@@ -112,7 +112,7 @@ export default function About() {
         </Container>
         <Container display={`flex`} justifyContent={`center`}>
           <NextChakraImage
-            src={`/assets/images/how-it-works.png`}
+            src={`/assets/about/how-it-works.png`}
             alt="How does it work?"
             width={`400`}
             height={`400`}
@@ -167,7 +167,7 @@ export default function About() {
         </Container>
         <Container display={`flex`} justifyContent={`center`}>
           <NextChakraImage
-            src={`/assets/images/policy-labs.png`}
+            src={`/assets/about/policy-labs.png`}
             alt="About us: www.policylabAfrica.org"
             width={`400`}
             height={`400`}
