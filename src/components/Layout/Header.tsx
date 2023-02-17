@@ -283,7 +283,9 @@ export default function Header() {
                 color={`white`}
                 bgColor={`primary.500`}
               >
-                <Link href={`report-violence`}>Report Violence</Link>
+                <Link onClick={onToggle} href={`report-violence`}>
+                  Report Violence
+                </Link>
               </Button>
             </Stack>
           </AnimatedBox>
