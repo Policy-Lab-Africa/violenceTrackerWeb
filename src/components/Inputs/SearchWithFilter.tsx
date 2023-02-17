@@ -72,7 +72,7 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
         zIndex={`99999999999`}
         width="full"
       >
-        <DateRange
+        {/* <DateRange
           ranges={[
             {
               startDate: start,
@@ -85,7 +85,7 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
             setStart(date.selection.startDate);
             setEnd(date.selection.endDate);
           }}
-        />
+        /> */}
       </Box>
     </Container>
   );
