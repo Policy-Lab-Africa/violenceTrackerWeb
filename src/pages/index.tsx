@@ -154,7 +154,7 @@ export default function Home() {
         >
           {/* Desktop Image */}
           <NextChakraImage
-            src={`/assets/images/see-omething-say-something.png`}
+            src={`/assets/landing/see-omething-say-something.png`}
             alt="See something, Say something."
             width={`900`}
             height={`450`}
@@ -201,7 +201,7 @@ export default function Home() {
             }}
           >
             <NextChakraImage
-              src={`/assets/icons/thin-direction-pointer-bottom-icon.svg`}
+              src={`/assets/landing/thin-direction-pointer-bottom-icon.svg`}
               alt="Direction pointer"
               width={`8`}
               height={`8`}
@@ -220,7 +220,7 @@ export default function Home() {
             // width={`full`}
             height={`full`}
           >
-            <source src="/assets/video/map-animation.mp4" type="video/mp4" />
+            <source src="/assets/landing/map-animation.mp4" type="video/mp4" />
           </Video>
         </VStack>
       </Stack>
