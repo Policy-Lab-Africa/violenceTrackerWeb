@@ -227,7 +227,11 @@ export default function AccessData() {
       {/* Stage 1 */}
       {pageState == `idle` && !accessData && (
         <Stack direction={[`column`, `row`]} px={[`1rem`, `3rem`, `6rem`]}>
-          <Box py={`5rem`} alignItems={`start`} width={[`100%`, `80%`]}>
+          <Box
+            py={[`2rem`, `5rem`]}
+            alignItems={`start`}
+            width={[`100%`, `80%`]}
+          >
             <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
               Access Data
             </Heading>
@@ -244,6 +248,7 @@ export default function AccessData() {
                 flexDirection={`column`}
                 justifyContent={`center`}
                 alignItems={`center`}
+                py={[`10`, `4`]}
               >
                 <SearchWithFilter onChange={handleSearchInput} />
                 <Text
@@ -309,7 +314,7 @@ export default function AccessData() {
               </Container>
             )}
           </Box>
-          <Box width={`full`} px={[`1rem`, `1rem`]} py={`5rem`}>
+          <Box width={`full`} px={[`1rem`, `1rem`]} py={[`1rem`, `5rem`]}>
             <VTMap data={report} />
           </Box>
         </Stack>

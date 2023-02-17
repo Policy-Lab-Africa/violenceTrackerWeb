@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import L from 'leaflet';
 import 'leaflet-boundary-canvas';
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 const iconPerson = new L.Icon({
@@ -29,7 +29,7 @@ export default function GeneralMapReport({
     <Box width={`full`} height={[`300px`, `400px`]}>
       <MapContainer
         center={[9.082, 8.6753]}
-        zoom={6}
+        zoom={5}
         scrollWheelZoom={false}
         style={{ height: `100%`, width: `100%`, zIndex: 1 }}
         dragging={true}

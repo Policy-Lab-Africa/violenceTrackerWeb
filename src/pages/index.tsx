@@ -3,7 +3,6 @@ import XMark from '@/components/Icons/XMark';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import VTGeneralMap from '@/features/view-reports/VTGeneralMap';
 import {
-  AspectRatio,
   Box,
   Button,
   chakra,
@@ -228,9 +227,7 @@ export default function Home() {
 
       {/* Map */}
       <Box px={[`1rem`, `6rem`]} py={[`1rem`, `6rem`]}>
-        <AspectRatio ratio={16 / 9}>
-          <VTGeneralMap data={data} />
-        </AspectRatio>
+        <VTGeneralMap data={data} />
       </Box>
     </Box>
   );

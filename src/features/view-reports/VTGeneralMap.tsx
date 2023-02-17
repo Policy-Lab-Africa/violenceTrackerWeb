@@ -1,4 +1,4 @@
-import { SearchResults, ViolenceReport } from '@/types';
+import { ViolenceReport } from '@/types';
 import { Box } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 

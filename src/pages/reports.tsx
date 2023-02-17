@@ -1,4 +1,4 @@
-import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
+// import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
 import ShowReports from '@/features/view-reports/ShowReports';
 import { Box, Flex, Heading, VStack } from '@chakra-ui/react';
 
@@ -20,7 +20,7 @@ export default function Reports() {
             Reports
           </Heading>
 
-          <SearchWithFilter />
+          {/* <SearchWithFilter /> */}
           <Box />
         </Flex>
 

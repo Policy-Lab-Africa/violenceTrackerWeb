@@ -1,17 +1,7 @@
-import {
-  fetchInfiniteViolenceReports,
-  fetchViolenceReports,
-} from '@/app/services/violence-report';
+import { fetchInfiniteViolenceReports } from '@/app/services/violence-report';
 import Tweet from '@/components/Twitter/Tweet';
-import {
-  Box,
-  Button,
-  Container,
-  HStack,
-  Skeleton,
-  Spinner,
-} from '@chakra-ui/react';
-import React, { Fragment } from 'react';
+import { Button, Container, HStack, Skeleton, Spinner } from '@chakra-ui/react';
+import { Fragment } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
 export default function ShowReports() {
@@ -19,7 +9,7 @@ export default function ShowReports() {
     useInfiniteQuery(
       [`reports`],
       ({ pageParam }) =>
-        fetchInfiniteViolenceReports({ limit: 4, pageParam: pageParam }),
+        fetchInfiniteViolenceReports({ limit: 30, pageParam: pageParam }),
       {
         getNextPageParam: (lastPage, pages) => {
           if (lastPage.current_page == lastPage.last_page) return undefined;
@@ -41,12 +31,15 @@ export default function ShowReports() {
         alignItems={`center`}
         px={`16px`}
       >
-        <Skeleton width={`full`} height={`100px`} mb="32px" />
-        <Skeleton width={`full`} height={`100px`} mb="32px" />
-        <Skeleton width={`full`} height={`100px`} mb="32px" />
-        <Skeleton width={`full`} height={`100px`} mb="32px" />
-        <Skeleton width={`full`} height={`100px`} mb="32px" />
-        <Skeleton width={`full`} height={`100px`} mb="32px" />
+        {new Array(30).fill(1).map((_, index) => (
+          <Skeleton
+            width={`full`}
+            height={`100px`}
+            borderRadius={`16px`}
+            mb="32px"
+            key={index}
+          />
+        ))}
       </Container>
     );
 
