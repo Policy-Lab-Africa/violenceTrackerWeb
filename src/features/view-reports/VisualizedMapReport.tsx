@@ -13,8 +13,8 @@ import {
 } from 'react-leaflet';
 
 const iconPerson = new L.Icon({
-  iconUrl: `/assets/icons/danger-map.svg`,
-  iconRetinaUrl: `/assets/icons/danger-map.svg`,
+  iconUrl: `/assets/maps/danger-map.svg`,
+  iconRetinaUrl: `/assets/maps/danger-map.svg`,
   iconAnchor: undefined,
   popupAnchor: undefined,
   shadowUrl: undefined,
