@@ -46,7 +46,6 @@ const NavItem = ({
   isActive: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
-  console.log(item.href, isActive);
   return (
     <Box
       cursor={`pointer`}
