@@ -38,6 +38,7 @@ import {
   Text as PDFText,
   View,
 } from '@react-pdf/renderer';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';

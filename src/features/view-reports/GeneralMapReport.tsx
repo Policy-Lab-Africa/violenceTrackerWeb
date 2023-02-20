@@ -1,5 +1,5 @@
 import { ViolenceReport } from '@/types';
-import { Box } from '@chakra-ui/react';
+import { Box, useMediaQuery } from '@chakra-ui/react';
 import L from 'leaflet';
 import 'leaflet-boundary-canvas';
 import 'leaflet/dist/leaflet.css';
@@ -24,12 +24,16 @@ export default function GeneralMapReport({
   data?: ViolenceReport[];
 }) {
   const mapRef = useRef<L.Map>(null);
+  const [isLargerThan800] = useMediaQuery(`(min-width: 800px)`, {
+    ssr: true,
+    fallback: false, // return false on the server, and re-evaluate on the client side
+  });
 
   return (
-    <Box width={`full`} height={[`300px`, `400px`]}>
+    <Box width={`full`} height={[`300px`, `800px`]}>
       <MapContainer
         center={[9.082, 8.6753]}
-        zoom={5}
+        zoom={isLargerThan800 ? 7 : 5}
         scrollWheelZoom={false}
         style={{ height: `100%`, width: `100%`, zIndex: 1 }}
         dragging={true}

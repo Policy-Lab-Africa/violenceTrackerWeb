@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: JSX.Element }) {
   return (
     <Box>
       <Head>
-        <title>Report and Share voilence incidence.</title>
+        <title>Report and Share Electoral Violence Incidents</title>
         <meta
           name="description"
           content="Report and Share voilence incidence."

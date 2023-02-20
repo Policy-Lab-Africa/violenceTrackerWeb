@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { MouseEventHandler, useState } from 'react';
 import { NextChakraImage } from '../Images/NextChakraImage';
 import MarqueeHeader from './MarqueeHeader';
@@ -37,8 +38,15 @@ const NAV_ITEM: NavItemData[] = [
   },
 ];
 
-const NavItem = ({ item }: { item: NavItemData }) => {
+const NavItem = ({
+  item,
+  isActive,
+}: {
+  item: NavItemData;
+  isActive: boolean;
+}) => {
   const [hovered, setHovered] = useState(false);
+  console.log(item.href, isActive);
   return (
     <Box
       cursor={`pointer`}
@@ -54,7 +62,7 @@ const NavItem = ({ item }: { item: NavItemData }) => {
           content: `""`,
           position: `absolute`,
           bottom: 0,
-          right: hovered ? `0%` : `100%`,
+          right: hovered || isActive ? `0%` : `100%`,
           left: 0,
           top: `100%`,
           height: `4px`,
@@ -72,9 +80,11 @@ const NavItem = ({ item }: { item: NavItemData }) => {
 const MobileNavItem = ({
   item,
   onClick,
+  isActive,
 }: {
   item: NavItemData;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+  isActive: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
   return (
@@ -94,7 +104,7 @@ const MobileNavItem = ({
           content: `""`,
           position: `absolute`,
           bottom: 0,
-          right: hovered ? `0%` : `100%`,
+          right: hovered || isActive ? `0%` : `100%`,
           left: 0,
           top: `100%`,
           height: `4px`,
@@ -120,6 +130,7 @@ const AnimatedBox = chakra(motion.div, {
 });
 
 export default function Header() {
+  const router = useRouter();
   const { isOpen, onToggle } = useDisclosure();
   const barAVariant = {
     open: { top: `50%`, rotate: `45deg` },
@@ -136,16 +147,16 @@ export default function Header() {
     closed: { top: `75%`, rotate: `0deg` },
   };
 
-  const headerVariant = {
-    open: {
-      backgroundColor: `red`,
-      top: 0,
-      bottom: 0,
-      right: 0,
-      left: 0,
-    },
-    closed: { top: 0, bottom: 0, right: 0, left: 0, backgroundColor: `blue` },
-  };
+  // const headerVariant = {
+  //   open: {
+  //     backgroundColor: `red`,
+  //     top: 0,
+  //     bottom: 0,
+  //     right: 0,
+  //     left: 0,
+  //   },
+  //   closed: { top: 0, bottom: 0, right: 0, left: 0, backgroundColor: `blue` },
+  // };
 
   return (
     <AnimatedBox
@@ -182,7 +193,11 @@ export default function Header() {
           <Flex display={[`none`, `flex`]}>
             <Stack direction={`row`} alignItems="center">
               {NAV_ITEM.map((item) => (
-                <NavItem item={item} key={item.label} />
+                <NavItem
+                  item={item}
+                  key={item.label}
+                  isActive={router.pathname == item.href}
+                />
               ))}
 
               <Button
@@ -270,6 +285,7 @@ export default function Header() {
                   onClick={onToggle}
                   item={item}
                   key={item.label}
+                  isActive={router.pathname == item.href}
                 />
               ))}
 
