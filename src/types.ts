@@ -101,19 +101,16 @@ export type PaginatedReponse<T> = {
   per_page: number;
 };
 
-export interface SearchMetaData {
-  meta_data: {
-    violence_reports: {
-      count: number;
-    };
-    local_governments: {
-      count: number;
-    };
-    types: {
-      types: ViolenceType[];
-      count: number;
-    };
-  };
+export interface LGAMeta {
+  data: ViolenceType[];
+  count_unique: number;
+  count_by_reports: { [key: string]: number }[];
+}
+
+export interface ViolenceTypeMeta {
+  data: ViolenceType[];
+  count_unique: number;
+  count_by_reports: { [key: string]: number }[];
 }
 
 export interface StateSearchData {
@@ -125,16 +122,8 @@ export interface StateSearchData {
     polling_units: {
       count: number;
     };
-    local_governments: {
-      data: LGA[];
-      count_unique: number;
-      count_reports: { [key: string]: number }[];
-    };
-    types: {
-      data: ViolenceType[];
-      count_unique: number;
-      count_by_reports: { [key: string]: number }[];
-    };
+    local_governments: LGAMeta;
+    types: ViolenceTypeMeta;
   };
 }
 
@@ -144,22 +133,54 @@ export interface LGASearchData {
     violence_reports: {
       count: number;
     };
-    local_governments: {
-      local_governments: LGA[];
-      count_unique: number;
-      count_reports?: any;
+    local_governments: LGAMeta;
+    types: ViolenceTypeMeta;
+  };
+}
+
+export interface WardSearchData {
+  data: Ward[];
+  meta_data: {
+    violence_reports: {
+      count: number;
     };
-    types: {
-      types: ViolenceType[];
-      count_unique: number;
-      count_by_reports?: any;
+    polling_units: {
+      count: number;
     };
+    local_governments: LGAMeta;
+    types: ViolenceTypeMeta;
+  };
+}
+
+export interface PUSearchData {
+  data: PollingUnit[];
+  meta_data: {
+    violence_reports: {
+      count: number;
+    };
+    polling_units: {
+      count: number;
+    };
+    local_governments: LGAMeta;
+    types: ViolenceTypeMeta;
   };
 }
 
 export interface SearchResults {
   state_results: StateSearchData;
-  local_government_results: SearchMetaData;
-  ward_results: SearchMetaData;
-  polling_unit_results: SearchMetaData;
+  local_government_results: LGASearchData;
+  ward_results: WardSearchData;
+  polling_unit_results: PUSearchData;
 }
+
+export type AvailableViolentTypes =
+  | 'Attempted Murder'
+  | 'Gun Shots'
+  | 'Murder'
+  | 'Intimidation'
+  | 'Physical Harm'
+  | 'Ballot Box Snatching'
+  | 'Physical Threat'
+  | 'Group Clash'
+  | 'Sexual Violence'
+  | 'Other';

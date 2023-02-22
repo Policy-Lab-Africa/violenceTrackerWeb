@@ -29,6 +29,10 @@ import { Formik, FormikHelpers } from 'formik';
 import { useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import * as Yup from 'yup';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { verify } from 'crypto';
+
+const RECAPTCHA_SITEKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
 interface ReportViolenceForm {
   ng_state_id: OptionValue | null;
@@ -90,6 +94,50 @@ export default function ReportViolence() {
   // const [selectedPU, setSelectedPU] = useState<OptionValue>();
   const violenceEvidence = useRef<HTMLInputElement>(null);
   const toast = useToast();
+  const [recaptchaVerified, setRecaptchaVerified] = useState<boolean>(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const verifyToken = async (token: string) => {
+    try {
+      const response = await fetch(`/api/verify`, {
+        method: `POST`,
+        body: JSON.stringify({ recaptchaToken: token }),
+        headers: {
+          'Content-Type': `application/json`,
+        },
+      });
+
+      if (response.ok) {
+        const verObj = await response.json();
+        if (verObj.success) {
+          setRecaptchaVerified(true);
+        }
+      } else {
+        // Else throw an error with the message returned
+        // from the API
+        const error = await response.json();
+        throw new Error(error.message);
+      }
+    } catch (error: any) {
+      console.log(error?.message || `Something went wrong`);
+    }
+  };
+
+  const handleRecaptcha = (token: string | null): void => {
+    if (!token) {
+      toast({
+        title: `Oops! `,
+        description: `Invalid recaptcha`,
+        status: `error`,
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    verifyToken(token);
+  };
 
   const { status: statesStatus, data: states } = useQuery(
     `states`,
@@ -147,6 +195,8 @@ export default function ReportViolence() {
       return;
     }
 
+    // Verify captcha here
+
     formData.append(`ng_state_id`, values.ng_state_id.value.toString());
     formData.append(
       `ng_local_government_id`,
@@ -164,6 +214,7 @@ export default function ReportViolence() {
     // Add the uploaded File
     formData.append(`file`, values.file);
 
+    setRecaptchaVerified(false);
     reportViolenceSubmiter.mutate(formData, {
       onError: (error) => {
         const e = error as AxiosError<{ message: string }>;
@@ -175,6 +226,8 @@ export default function ReportViolence() {
           duration: 9000,
           isClosable: true,
         });
+
+        recaptchaRef.current?.reset();
       },
       onSuccess: () => {
         if (violenceEvidence.current) {
@@ -189,6 +242,7 @@ export default function ReportViolence() {
           duration: 9000,
           isClosable: true,
         });
+        recaptchaRef.current?.reset();
       },
     });
   };
@@ -418,6 +472,14 @@ export default function ReportViolence() {
                 <FormErrorMessage>{errors.hashtags}</FormErrorMessage>
               </FormControl>
 
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                // size="invisible"
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                sitekey={RECAPTCHA_SITEKEY!}
+                onChange={handleRecaptcha}
+              />
+
               <Button
                 type="submit"
                 bgColor={`primary.500`}
@@ -429,7 +491,9 @@ export default function ReportViolence() {
                   border: `1px`,
                 }}
                 isLoading={reportViolenceSubmiter.isLoading}
-                isDisabled={reportViolenceSubmiter.isLoading}
+                isDisabled={
+                  reportViolenceSubmiter.isLoading || !recaptchaVerified
+                }
               >
                 Submit Report
               </Button>
