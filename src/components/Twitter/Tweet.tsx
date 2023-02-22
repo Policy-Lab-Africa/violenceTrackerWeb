@@ -1,17 +1,15 @@
 import { ViolenceReport } from '@/types';
-import { HStack, Text, VStack } from '@chakra-ui/react';
-import { format, formatDistance } from 'date-fns';
-import { isToday } from 'date-fns/esm';
-import { DislikeIcon, LikeIcon, ShareIcon } from '../Icons';
+import { Text, VStack } from '@chakra-ui/react';
 
 const formatDate = (date: string) => {
-  const dateObj = new Date(date);
+  // const dateObj = new Date(date);
 
-  if (isToday(dateObj)) {
-    return formatDistance(dateObj, new Date(), { addSuffix: true });
-  }
+  // if (isToday(dateObj)) {
+  //   return formatDistance(dateObj, new Date(), { addSuffix: true });
+  // }
 
-  return format(dateObj, `d MMM, YYY`);
+  // return format(dateObj, `d MMM, YYY`);
+  return `5hrs ago`;
 };
 
 export default function Tweet({ report }: { report: ViolenceReport }) {
