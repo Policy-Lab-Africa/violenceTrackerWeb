@@ -62,7 +62,7 @@ const initialValues: ReportViolenceForm = {
 
 const ReportViolenceValidation = Yup.object().shape({
   description: Yup.string()
-    .required()
+    .optional()
     .min(10, `Too Short!`)
     .max(1000, `Too Long!`)
     .label(`Description`),
@@ -82,9 +82,7 @@ const ReportViolenceValidation = Yup.object().shape({
   type_id: Yup.mixed()
     .required(`Select the type of violence`)
     .label(`Violence Type`),
-  file: Yup.mixed()
-    .required(`Video/Picture evidence is required`)
-    .label(`Evidence`),
+  file: Yup.mixed().optional().label(`Evidence`),
 });
 
 export default function ReportViolence() {

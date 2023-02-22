@@ -228,11 +228,7 @@ export default function AccessData() {
       {/* Stage 1 */}
       {pageState == `idle` && !accessData && (
         <Stack direction={[`column`, `row`]} px={[`1rem`, `3rem`, `6rem`]}>
-          <Box
-            py={[`2rem`, `5rem`]}
-            alignItems={`start`}
-            width={[`100%`, `80%`]}
-          >
+          <Box py={[`2rem`, `5rem`]} alignItems={`start`} width={[`100%`]}>
             <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
               Access Data
             </Heading>
@@ -314,9 +310,6 @@ export default function AccessData() {
                 {/* <NextChakraImage src={"/assets/images/"} /> */}
               </Container>
             )}
-          </Box>
-          <Box width={`full`} px={[`1rem`, `1rem`]} py={[`1rem`, `5rem`]}>
-            <VTMap data={report} />
           </Box>
         </Stack>
       )}
@@ -412,6 +405,7 @@ export default function AccessData() {
                 width="100%"
                 pt="56px"
               >
+                {/* If state has data */}
                 {report?.state_results.meta_data.types.count_by_reports.map(
                   (info, index) => (
                     <Flex
@@ -435,6 +429,12 @@ export default function AccessData() {
                     </Flex>
                   ),
                 )}
+
+                {/* If LGA has data */}
+
+                {/* If Ward has data */}
+
+                {/* If Polling unit has data */}
               </Container>
 
               <Container maxWidth={`container.md`} py={`56px`}>
