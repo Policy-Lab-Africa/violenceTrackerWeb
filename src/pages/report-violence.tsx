@@ -94,6 +94,7 @@ export default function ReportViolence() {
   // const [selectedPU, setSelectedPU] = useState<OptionValue>();
   const violenceEvidence = useRef<HTMLInputElement>(null);
   const toast = useToast();
+  const [recaptchaTk, setRecaptchaTk] = useState<string>(``);
   const [recaptchaVerified, setRecaptchaVerified] = useState<boolean>(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
@@ -135,7 +136,7 @@ export default function ReportViolence() {
 
       return;
     }
-
+    setRecaptchaTk(token);
     verifyToken(token);
   };
 
@@ -195,7 +196,8 @@ export default function ReportViolence() {
       return;
     }
 
-    // Verify captcha here
+    // Add the recaptcha token
+    formData.append(`recaptchaToken`, recaptchaTk);
 
     formData.append(`ng_state_id`, values.ng_state_id.value.toString());
     formData.append(
