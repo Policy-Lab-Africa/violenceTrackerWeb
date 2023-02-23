@@ -216,6 +216,7 @@ export default function Home() {
             borderColor={`primary.dark`}
             borderWidth="4px"
             autoPlay
+            muted
             loop
             // width={`full`}
             height={`full`}
