@@ -33,6 +33,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { verify } from 'crypto';
 
 const RECAPTCHA_SITEKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface ReportViolenceForm {
   ng_state_id: OptionValue | null;
@@ -98,7 +99,7 @@ export default function ReportViolence() {
 
   const verifyToken = async (token: string) => {
     try {
-      const response = await fetch(`/api/verify`, {
+      const response = await fetch(`${API_URL}/verify`, {
         method: `POST`,
         body: JSON.stringify({ recaptchaToken: token }),
         headers: {
@@ -108,7 +109,7 @@ export default function ReportViolence() {
 
       if (response.ok) {
         const verObj = await response.json();
-        if (verObj.success) {
+        if (verObj.data.success) {
           setRecaptchaVerified(true);
         }
       } else {
