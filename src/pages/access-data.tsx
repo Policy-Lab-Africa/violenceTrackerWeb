@@ -15,6 +15,7 @@ import { sampleResult, SearchResults } from '@/types';
 import {
   Box,
   Button,
+  Center,
   Container,
   Flex,
   Heading,
@@ -162,7 +163,7 @@ const ReportPDF = ({ data }: { data?: SearchResults }) => (
 
 export default function AccessData() {
   const [pageState, setPageState] = useState<ValidState>(`idle`);
-  const [report, setReport] = useState<SearchResults>(sampleResult);
+  const [report, setReport] = useState<SearchResults>();
   const [search, setSearch] = useState<SearchInputData>();
   const [makeSearch, setMakeSearch] = useState<boolean>(false);
   const toast = useToast();
@@ -316,7 +317,22 @@ export default function AccessData() {
         </Stack>
       )}
 
-      <DataAggregator report={report} showReport={accessData} />
+      {report && <DataAggregator report={report} showReport={accessData} />}
+
+      {report && (
+        <Center>
+          <Button
+            as="a"
+            onClick={() => {
+              setPageState(`idle`);
+              setAccessData(false);
+              setReport(undefined);
+            }}
+          >
+            Go Back
+          </Button>
+        </Center>
+      )}
 
       <Modal onClose={() => setShowPDF(false)} size={`full`} isOpen={showPDF}>
         <ModalOverlay />

@@ -18,6 +18,7 @@ export interface LGA {
   state_id: number;
   created_at: string;
   updated_at: string;
+  polling_units?: PollingUnit[];
 }
 
 export interface Ward {

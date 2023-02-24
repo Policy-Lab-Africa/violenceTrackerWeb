@@ -76,8 +76,13 @@ export default function DataResult({
     );
   }
   return (
-    <Box>
-      <Flex direction={`column`} width={`25%`} alignItems={`center`}>
+    <Flex
+      flexWrap={`wrap`}
+      justifyContent={[`center`]}
+      width={`full`}
+      rowGap={`16`}
+    >
+      <Flex direction={`column`} width={[`50%`, `25%`]} alignItems={`center`}>
         <ReportIcon size={48} my={`12px`} />
         <Text fontSize={`sm`} textTransform={`capitalize`}>
           Violence in{` `}
@@ -105,6 +110,6 @@ export default function DataResult({
           </Text>
         </Flex>
       ))}
-    </Box>
+    </Flex>
   );
 }

@@ -1,4 +1,5 @@
-import { SearchResults } from '@/types';
+import { DataLevel } from '@/components/AccessData/DataAggregator';
+import { LGA, PollingUnit, SearchResults, State, Ward } from '@/types';
 import { Box } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 
@@ -7,7 +8,8 @@ const DynamicMap = dynamic(() => import(`./VisualizedMapReport`), {
 });
 
 export interface MapProps {
-  data?: SearchResults;
+  data?: State | LGA | Ward | PollingUnit;
+  regionKey: DataLevel;
 }
 
 export default function VTMap(props: MapProps) {

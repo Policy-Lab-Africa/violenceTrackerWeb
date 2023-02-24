@@ -257,7 +257,9 @@ export default function DataAggregator({
       {showReport && (
         <VStack width={`full`}>
           <Box width={`full`} px={[`1rem`, `1rem`]} py={`5rem`}>
-            <VTMap data={report} />
+            {regionShowing && (
+              <VTMap regionKey={resultKey} data={regionShowing} />
+            )}
           </Box>
 
           {othersHaveData && !confirmedSelection && (

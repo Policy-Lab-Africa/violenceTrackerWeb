@@ -1,4 +1,5 @@
-import { SearchResults } from '@/types';
+import { DataLevel } from '@/components/AccessData/DataAggregator';
+import { LGA, PollingUnit, SearchResults, State, Ward } from '@/types';
 import { Box } from '@chakra-ui/react';
 import L, { LatLngTuple } from 'leaflet';
 import 'leaflet-boundary-canvas';
@@ -24,7 +25,8 @@ const iconPerson = new L.Icon({
 });
 
 export interface MapProps {
-  data?: SearchResults;
+  data?: State | LGA | Ward | PollingUnit;
+  regionKey: DataLevel;
 }
 
 export interface LatLong {
@@ -66,15 +68,19 @@ function SetBoundsRectangles({
   );
 }
 
-function extractBounds(data: SearchResults) {
+function extractBounds(
+  data: State | LGA | Ward | PollingUnit,
+  region: DataLevel,
+) {
   let x = 9.082;
   let y = 8.6753;
   let X = 9.082;
   let Y = 8.6753;
 
   let initialized = false;
+  const pollingUnits = extractPollingUnits(data, region);
 
-  data?.state_results.data[0]?.polling_units?.map((pu) => {
+  pollingUnits?.map((pu) => {
     if (!pu.location.latitude || !pu.location.longitude) return null;
 
     if (!initialized) {
@@ -115,7 +121,26 @@ function extractBounds(data: SearchResults) {
   ];
 }
 
-export default function VisualizedMapReport({ data }: MapProps) {
+function extractPollingUnits(
+  data: State | LGA | Ward | PollingUnit,
+  region: DataLevel,
+) {
+  if (region == `state_results`) {
+    const newData = data as State;
+    return newData.polling_units;
+  } else if (region == `local_government_results`) {
+    const newData = data as LGA;
+    return newData.polling_units;
+  } else if (region == `ward_results`) {
+    const newData = data as LGA;
+    return newData.polling_units;
+  } else {
+    const newData = data as PollingUnit;
+    return [newData];
+  }
+}
+
+export default function VisualizedMapReport({ data, regionKey }: MapProps) {
   const mapRef = useRef<L.Map>(null);
   const [mapTop, setMapTop] = useState<LatLong>({ lat: 9.082, long: 8.6753 });
   const [mapBottom, setMapBottom] = useState<LatLong>({
@@ -125,7 +150,7 @@ export default function VisualizedMapReport({ data }: MapProps) {
 
   useEffect(() => {
     if (data) {
-      const [[x, y], [X, Y]] = extractBounds(data);
+      const [[x, y], [X, Y]] = extractBounds(data, regionKey);
       setMapTop({ lat: x, long: y });
       setMapBottom({ lat: X, long: Y });
 
@@ -135,6 +160,15 @@ export default function VisualizedMapReport({ data }: MapProps) {
       ]);
     }
   }, [data]);
+
+  if (!data)
+    return (
+      <Box
+        width={`full`}
+        height={[`300px`, `400px`]}
+        bgColor={`primary.100`}
+      ></Box>
+    );
 
   return (
     <Box width={`full`} height={[`300px`, `400px`]}>
@@ -150,7 +184,7 @@ export default function VisualizedMapReport({ data }: MapProps) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {data?.state_results.data[0]?.polling_units?.map((pu) => {
+        {extractPollingUnits(data, regionKey)?.map((pu) => {
           // pu.violencereports?.map((reports, index) => (
 
           // ));
@@ -175,22 +209,3 @@ export default function VisualizedMapReport({ data }: MapProps) {
     </Box>
   );
 }
-
-// {data?.state_results[0].data[0].polling_units?.map((pu) => (
-//   // <>
-//     {pu.violencereports?.map((report) => (
-//       <Marker
-//         key={report.id}
-//         icon={iconPerson}
-//         position={[
-//           parseFloat(report.longitude),
-//           parseFloat(report.latitude),
-//         ]}
-//       >
-//         <Popup>
-//           A pretty CSS3 popup. <br /> Easily customizable.
-//         </Popup>
-//       </Marker>
-//     ))}
-//   // </>
-// ))}
