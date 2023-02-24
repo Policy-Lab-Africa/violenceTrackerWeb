@@ -1,4 +1,6 @@
 import { searchReports } from '@/app/services/violence-report';
+import DataAggregator from '@/components/AccessData/DataAggregator';
+import StateResult from '@/components/AccessData/StateResult';
 import { AnimatedBox } from '@/components/Animated';
 import {
   ChevronRightIcon,
@@ -9,7 +11,7 @@ import SearchWithFilter, {
   SearchInputData,
 } from '@/components/Inputs/SearchWithFilter';
 import VTMap from '@/features/view-reports/VTMap';
-import { SearchResults } from '@/types';
+import { sampleResult, SearchResults } from '@/types';
 import {
   Box,
   Button,
@@ -160,7 +162,7 @@ const ReportPDF = ({ data }: { data?: SearchResults }) => (
 
 export default function AccessData() {
   const [pageState, setPageState] = useState<ValidState>(`idle`);
-  const [report, setReport] = useState<SearchResults>();
+  const [report, setReport] = useState<SearchResults>(sampleResult);
   const [search, setSearch] = useState<SearchInputData>();
   const [makeSearch, setMakeSearch] = useState<boolean>(false);
   const toast = useToast();
@@ -314,186 +316,7 @@ export default function AccessData() {
         </Stack>
       )}
 
-      {/* Stage 2 */}
-      {accessData && (
-        <VStack
-          px={[`1rem`, `6rem`]}
-          py={`5rem`}
-          alignItems={`center`}
-          width={`full`}
-        >
-          {/* Heading */}
-          <Flex
-            direction={`row`}
-            justifyContent={`space-between`}
-            width={`full`}
-          >
-            <Heading
-              textTransform={`uppercase`}
-              fontSize={`2xl`}
-              fontWeight={`bold`}
-              color={`primary.500`}
-            >
-              {report?.state_results.data[0].name} STATE ELECTION VIOLENCE DATA
-            </Heading>
-
-            <Flex direction={`row`} alignItems={`center`}>
-              <Text
-                fontSize={`md`}
-                fontWeight={`semibold`}
-                color={`primary.500`}
-              >
-                <Link href={`reports`}>View Reports{` `}</Link>
-              </Text>
-              <ChevronRightIcon
-                display={`inline`}
-                color={`primary.500`}
-                size={`24`}
-              />
-            </Flex>
-          </Flex>
-
-          {/* 2 of 2 */}
-          {pageState == `download` ? (
-            <Container
-              maxWidth={[`sm`, `lg`]}
-              height={`full`}
-              display={`flex`}
-              alignSelf={`center`}
-              flexDirection={`column`}
-              justifyContent={`center`}
-              alignItems={`center`}
-              py="48px"
-            >
-              <Input
-                type={`email`}
-                placeholder="Please input your email address"
-                size="lg"
-                focusBorderColor="primary.500"
-                mb={`24px`}
-              />
-
-              <Button
-                bgColor={`primary.500`}
-                color={`white`}
-                width={`80%`}
-                mb="12px"
-                _hover={{
-                  bgColor: `surface`,
-                  color: `primary.500`,
-                  border: `1px`,
-                }}
-              >
-                Download Report
-              </Button>
-            </Container>
-          ) : (
-            <VStack>
-              {/* 1 of 2 */}
-
-              <Box width={`full`} px={[`1rem`, `1rem`]} py={`5rem`}>
-                <VTMap data={report} />
-              </Box>
-
-              <Container
-                display={`flex`}
-                maxWidth={`container.md`}
-                flexDirection={`row`}
-                flexWrap={`wrap`}
-                justifyContent="center"
-                rowGap={`48px`}
-                width="100%"
-                pt="56px"
-              >
-                {/* If state has data */}
-                {report?.state_results.meta_data.types.count_by_reports.map(
-                  (info, index) => (
-                    <Flex
-                      key={index}
-                      direction={`column`}
-                      width={`25%`}
-                      alignItems={`center`}
-                    >
-                      <ReportIcon size={48} my={`12px`} />
-                      <Text fontSize={`sm`} textTransform={`capitalize`}>
-                        <Text
-                          color="primary.500"
-                          fontSize={`2xl`}
-                          display={`inline`}
-                        >
-                          {info[Object.keys(info)[0]]}
-                          {` `}
-                        </Text>
-                        {Object.keys(info)[0]}
-                      </Text>
-                    </Flex>
-                  ),
-                )}
-
-                {/* If LGA has data */}
-
-                {/* If Ward has data */}
-
-                {/* If Polling unit has data */}
-              </Container>
-
-              <Container maxWidth={`container.md`} py={`56px`}>
-                {/* <Text>
-                  <Text
-                    display={`inline`}
-                    color={`primary.500`}
-                    fontWeight={`bold`}
-                  >
-                    Data Summary:
-                  </Text>
-                  {` `}
-                  {report.summary}
-                </Text> */}
-              </Container>
-
-              <Flex
-                gap={`28px`}
-                justifyContent={`center`}
-                width={`full`}
-                py={`24px`}
-              >
-                <Button
-                  bgColor={`primary.500`}
-                  color={`white`}
-                  _hover={{
-                    bgColor: `surface`,
-                    color: `primary.500`,
-                    border: `1px`,
-                  }}
-                >
-                  <PDFDownloadLink
-                    fileName="violence_reports.pdf"
-                    document={<ReportPDF data={report} />}
-                  >
-                    {({ loading }) =>
-                      loading ? `Loading document...` : `Download Pdf`
-                    }
-                  </PDFDownloadLink>
-                </Button>
-
-                <Button
-                  variant={`outline`}
-                  bgColor={`surface`}
-                  borderColor={`primary.500`}
-                  color={`primary.500`}
-                  _hover={{
-                    bgColor: `primary.600`,
-                    color: `white`,
-                    border: `1px`,
-                  }}
-                >
-                  Share Data
-                </Button>
-              </Flex>
-            </VStack>
-          )}
-        </VStack>
-      )}
+      <DataAggregator report={report} showReport={accessData} />
 
       <Modal onClose={() => setShowPDF(false)} size={`full`} isOpen={showPDF}>
         <ModalOverlay />
