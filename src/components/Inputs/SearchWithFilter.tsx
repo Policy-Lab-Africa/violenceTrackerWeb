@@ -53,7 +53,10 @@ export default function SearchWithFilter({ onChange }: SearchInputProps) {
           size="lg"
           focusBorderColor="primary.500"
           value={q}
-          onChange={(e) => setQ(e.currentTarget.value)}
+          onChange={(e) => {
+            setQ(e.currentTarget.value);
+            if (onChange) onChange({ q: e.currentTarget.value, start, end });
+          }}
         />
         <InputRightElement
           cursor={`pointer`}

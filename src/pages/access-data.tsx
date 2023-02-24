@@ -177,12 +177,28 @@ export default function AccessData() {
       enabled: makeSearch,
       onSuccess: (data) => {
         setReport(data);
+        setAccessData(true);
       },
     },
   );
 
   const handleSearchInput = (values: SearchInputData) => {
-    if (!values.q) {
+    // if (!values.q) {
+    //   toast({
+    //     title: `Hey! `,
+    //     description: `Your search input should not be empty`,
+    //     status: `error`,
+    //     duration: 9000,
+    //     isClosable: true,
+    //   });
+
+    //   return;
+    // }
+    setSearch(values);
+  };
+
+  const handleSearch = () => {
+    if (!search?.q) {
       toast({
         title: `Hey! `,
         description: `Your search input should not be empty`,
@@ -193,26 +209,25 @@ export default function AccessData() {
 
       return;
     }
-    setSearch(values);
-  };
 
-  const handleSearch = () => {
     setMakeSearch(true);
-    console.log(`Perform search`);
   };
 
-  useEffect(() => {
-    if (!search?.q) return;
-    handleSearch();
-  }, [search]);
+  // useEffect(() => {
+  //   if (!search?.q) return;
+  //   handleSearch();
+  // }, [search]);
 
   useEffect(() => {
     if (report) {
       if (!report.state_results.data[0]) {
         setReport(undefined);
+        setAccessData(false);
+        setMakeSearch(false);
+        setSearch(undefined);
         toast({
           // title: `Hey! `,
-          description: `No state, lga, or polling unit matches your search.`,
+          description: `No violence report could be found in states, lgas, wards or polling units matching your search.`,
           status: `error`,
           duration: 9000,
           isClosable: true,
@@ -269,10 +284,9 @@ export default function AccessData() {
                     color: `primary.500`,
                     border: `1px`,
                   }}
-                  disabled={!report}
                   isLoading={isLoading}
                   onClick={() => {
-                    setAccessData(true);
+                    handleSearch();
                   }}
                 >
                   Access Data
@@ -327,6 +341,8 @@ export default function AccessData() {
               setPageState(`idle`);
               setAccessData(false);
               setReport(undefined);
+              setMakeSearch(false);
+              setSearch(undefined);
             }}
           >
             Go Back
