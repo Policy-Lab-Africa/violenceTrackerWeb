@@ -37,7 +37,7 @@ const HeroCTA = () => {
         }}
         transition=".5s"
       >
-        <Link href={`report-violence`}>Report Voilence</Link>
+        <Link href={`report-violence`}>Report Violence</Link>
       </Button>
       <Button
         onMouseEnter={() => setShouldSwitch(true)}
