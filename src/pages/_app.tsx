@@ -5,10 +5,12 @@ import customTheme from '@/themes';
 import Layout from '@/components/Layout';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import TagManager from 'react-gtm-module';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { AxiosError } from 'axios';
+import { useEffect } from 'react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +28,10 @@ const queryClient = new QueryClient({
 });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    TagManager.initialize({ gtmId: `G-XV8HGX4YGD` });
+  }, []);
+
   return (
     <ChakraProvider theme={customTheme}>
       <QueryClientProvider client={queryClient}>
