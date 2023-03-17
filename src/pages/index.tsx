@@ -9,6 +9,7 @@ import {
   Container,
   Flex,
   Heading,
+  HStack,
   shouldForwardProp,
   Stack,
   Text,
@@ -274,9 +275,93 @@ export default function Home() {
         px={[`1rem`, `6rem`]}
         py={[`1rem`, `6rem`]}
         justifyContent={`center`}
+        alignItems={`center`}
+        flexDirection={`column`}
+        gap={[`2`, `10`]}
       >
         <VTGeneralMap data={data} />
+        <HStack width={[`300px`, `465px`, `600px`]}>
+          <Box
+            borderColor="black"
+            backgroundColor={`black`}
+            width={`4px`}
+            height={`47px`}
+          />
+          <NextChakraImage
+            src={`/assets/landing/hint-scroll.gif`}
+            alt="Map hints."
+            width={`465`}
+            height={`47`}
+            overflowX={`visible`}
+            objectFit={`contain`}
+          />
+          <Box
+            borderColor="black"
+            backgroundColor={`black`}
+            width={`4px`}
+            height={`47px`}
+          />
+        </HStack>
       </Flex>
+
+      {/* Know the numbers */}
+      <Stack
+        px={[`3rem`, `6rem`]}
+        pt={[`4rem`, `0rem`]}
+        width="full"
+        bgColor={`surface`}
+        direction={[`column`, `row`]}
+        alignItems="center"
+      >
+        <VStack alignItems={`start`} height={`100%`} width={[`100%`, `50%`]}>
+          <Heading
+            whiteSpace={`nowrap`}
+            color={`secondary.900`}
+            fontSize={[`2xl`, `5xl`]}
+            fontWeight={`medium`}
+          >
+            Know the{` `}
+            <Text display={`inline`} color={`primary.500`} fontWeight="bold">
+              Numbers
+            </Text>
+          </Heading>
+          <Text
+            color={`secondary.600`}
+            fontWeight={`semibold`}
+            fontSize={`md`}
+            whiteSpace={[`normal`, `nowrap`]}
+            style={{ marginBottom: `24px` }}
+          >
+            View, download and share real time data of your preferred location.
+          </Text>
+          <Button
+            bgColor={`surface`}
+            border={`1px`}
+            borderColor={`primary.500`}
+            color={`primary.500`}
+            _hover={{
+              borderColor: `primary.500`,
+              bgColor: `primary.500`,
+              color: `white`,
+            }}
+            size={`md`}
+            transition=".5s"
+          >
+            <Link href={`access-data`}>Access Data</Link>
+          </Button>
+        </VStack>
+
+        <Flex width={`full`} justifyContent={`center`}>
+          <NextChakraImage
+            src={`/assets/landing/access-data.png`}
+            alt="See something, Say something."
+            width={`500`}
+            height={`500`}
+            overflowX={`visible`}
+            objectFit={`contain`}
+          />
+        </Flex>
+      </Stack>
     </Box>
   );
 }
