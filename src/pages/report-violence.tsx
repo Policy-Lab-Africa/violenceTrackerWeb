@@ -26,7 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { AxiosError } from 'axios';
 import { Formik, FormikHelpers } from 'formik';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import * as Yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -83,7 +83,7 @@ const ReportViolenceValidation = Yup.object().shape({
   type_id: Yup.mixed()
     .required(`Select the type of violence`)
     .label(`Violence Type`),
-  file: Yup.mixed().optional().label(`Evidence`),
+  file: Yup.object<File>().notRequired().label(`Evidence`),
 });
 
 export default function ReportViolence() {
@@ -96,6 +96,26 @@ export default function ReportViolence() {
   const [recaptchaTk, setRecaptchaTk] = useState<string>(``);
   const [recaptchaVerified, setRecaptchaVerified] = useState<boolean>(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const [isOnline, setIsOnline] = useState(true);
+  useEffect(() => {
+    const handleOnlineStatus = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    if (window) {
+      // setIsOnline(navigator.onLine);
+      window.addEventListener(`online`, handleOnlineStatus);
+      window.addEventListener(`offline`, handleOnlineStatus);
+    }
+
+    return () => {
+      if (window) {
+        window.removeEventListener(`online`, handleOnlineStatus);
+        window.removeEventListener(`offline`, handleOnlineStatus);
+      }
+    };
+  });
 
   const verifyToken = async (token: string) => {
     try {
@@ -194,9 +214,6 @@ export default function ReportViolence() {
     ) {
       return;
     }
-
-    // Add the recaptcha token
-    formData.append(`recaptchaToken`, recaptchaTk);
 
     formData.append(`ng_state_id`, values.ng_state_id.value.toString());
     formData.append(
@@ -473,13 +490,15 @@ export default function ReportViolence() {
                 <FormErrorMessage>{errors.hashtags}</FormErrorMessage>
               </FormControl>
 
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                // size="invisible"
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                sitekey={RECAPTCHA_SITEKEY!}
-                onChange={handleRecaptcha}
-              />
+              {isOnline && (
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  // size="invisible"
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  sitekey={RECAPTCHA_SITEKEY!}
+                  onChange={handleRecaptcha}
+                />
+              )}
 
               <Button
                 type="submit"
@@ -493,7 +512,8 @@ export default function ReportViolence() {
                 }}
                 isLoading={reportViolenceSubmiter.isLoading}
                 isDisabled={
-                  reportViolenceSubmiter.isLoading || !recaptchaVerified
+                  reportViolenceSubmiter.isLoading ||
+                  (!recaptchaVerified && isOnline)
                 }
               >
                 Submit Report
