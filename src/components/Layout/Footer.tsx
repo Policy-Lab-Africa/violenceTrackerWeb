@@ -1,5 +1,6 @@
 import { Box, chakra, Flex, Text, VStack } from '@chakra-ui/react';
 import { NextChakraImage } from '../Images/NextChakraImage';
+import FooterBG from './FooterBg';
 
 const SVG = chakra(`svg`, {
   shouldForwardProp: () => true,
@@ -7,24 +8,18 @@ const SVG = chakra(`svg`, {
 
 export default function Footer() {
   return (
-    <Box>
+    <Box
+    // backgroundImage={`/assets/`}
+    >
+      <Box height={[`0`, `300px`]} />
       <Box
         bottom={0}
         width={`full`}
         height={`max-content`}
-        position={`absolute`}
+        position={[`static`, `absolute`]}
       >
-        <SVG
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 -3.28571 55 3.286"
-          color={`primary.50`}
-        >
-          <path
-            d="M 0 0 L 55 0 V -2 Q 50 -5 36 -1 Q 30 1 18.005 -1.007 Q 4.291 -3.944 0.03 -1.616 V 0"
-            fill="currentColor"
-          />
-        </SVG>
-        <Box bgColor={`primary.50`} height={[`180px`, `36px`]} />
+        <FooterBG />
+        {/* <Box bgColor={`primary.50`} height={[`180px`, `36px`]} /> */}
       </Box>
       <Flex
         direction={[`column`, `row`]}
@@ -34,6 +29,7 @@ export default function Footer() {
         pt={`3rem`}
         pb={`1rem`}
         position={`relative`}
+        backgroundColor="#c8e9e6"
       >
         <Flex
           justifyContent={[`space-between`]}
