@@ -25,15 +25,15 @@ interface NavItemData {
 
 const NAV_ITEM: NavItemData[] = [
   {
-    label: `About`,
+    label: `About EVT`,
     href: `/about`,
   },
   {
-    label: `Reports`,
+    label: `View Reports`,
     href: `/reports`,
   },
   {
-    label: `Data`,
+    label: `Access Data`,
     href: `/access-data`,
   },
 ];
