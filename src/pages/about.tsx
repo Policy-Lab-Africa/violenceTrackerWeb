@@ -1,6 +1,6 @@
 import { AnimatedHeading, AnimatedText } from '@/components/Animated';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
-import { Container, Stack, VStack } from '@chakra-ui/react';
+import { Box, Button, Container, Link, Stack, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function About() {
@@ -109,6 +109,29 @@ export default function About() {
             Reports are visualized on a map using Leaflet and infographics. The
             data collected is open source and available for download and export.
           </AnimatedText>
+          <Box>
+            <Button
+              mt={`12px`}
+              bgColor={`primary.500`}
+              borderColor={`primary.500`}
+              borderWidth="2px"
+              color={`surface`}
+              _hover={{
+                borderColor: `primary.500`,
+                bgColor: `surface`,
+                color: `primary.500`,
+              }}
+              size={`md`}
+              transition=".5s"
+            >
+              <Link
+                target={`_blank`}
+                href={`/assets/about/EVT_ User_Guide.pdf`}
+              >
+                Download User Manual
+              </Link>
+            </Button>
+          </Box>
         </Container>
         <Container display={`flex`} justifyContent={`center`}>
           <NextChakraImage
