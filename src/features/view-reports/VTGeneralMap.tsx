@@ -12,7 +12,7 @@ export interface MapProps {
 
 export default function VTGeneralMap(props: MapProps) {
   return (
-    <Box width={`full`}>
+    <Box width={`90%`}>
       <DynamicMap {...props} />
     </Box>
   );

@@ -17,14 +17,14 @@ import {
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 
 const HeroCTA = () => {
   const [shouldSwitch, setShouldSwitch] = useState(false);
 
   return (
-    <>
+    <Flex gap={`6`}>
       <Button
         onMouseEnter={() => setShouldSwitch(true)}
         onMouseLeave={() => setShouldSwitch(false)}
@@ -37,6 +37,7 @@ const HeroCTA = () => {
           color: `primary.500`,
         }}
         transition=".5s"
+        size={`lg`}
       >
         <Link href={`report-violence`}>Report Violence</Link>
       </Button>
@@ -52,11 +53,12 @@ const HeroCTA = () => {
           bgColor: `primary.500`,
           color: `white`,
         }}
+        size={`lg`}
         transition=".5s"
       >
         <Link href={`access-data`}>Access Data</Link>
       </Button>
-    </>
+    </Flex>
   );
 };
 
@@ -77,6 +79,7 @@ export default function Home() {
     fetchViolenceReports(100),
   );
   const [isLargerThan800] = useMediaQuery(`(min-width: 800px)`);
+  const [isLargerThan1100] = useMediaQuery(`(min-width: 1100px)`);
 
   return (
     <Box>
@@ -84,16 +87,16 @@ export default function Home() {
       <Flex
         direction={[`column`, `row`]}
         width={`full`}
-        px={[`1rem`, `6rem`]}
+        pl={[`1rem`, `6rem`]}
         pt={[`4rem`, ``]}
-        height={[`max-content`, `500px`]}
+        height={[`max-content`, `500px`, `650px`]}
         alignItems={`center`}
       >
-        <Container flexGrow={1}>
+        <Container flexGrow={1} position={`relative`}>
           <Heading
             color={`secondary.600`}
             fontWeight={`semibold`}
-            fontSize={[`4xl`, `5xl`]}
+            fontSize={[`4xl`, `6xl`]}
           >
             See{` `}
             <Text as={`span`} fontWeight={`extrabold`} color="primary.500">
@@ -103,7 +106,7 @@ export default function Home() {
           <Heading
             color={`secondary.600`}
             fontWeight={`semibold`}
-            fontSize={[`4xl`, `5xl`]}
+            fontSize={[`4xl`, `6xl`]}
           >
             Share{` `}
             <Text as={`span`} fontWeight={`extrabold`} color="primary.500">
@@ -114,7 +117,8 @@ export default function Home() {
             mt="8px"
             color={`secondary.600`}
             fontWeight={`semibold`}
-            fontSize={`sm`}
+            fontSize={`xl`}
+            whiteSpace={[`normal`, `nowrap`]}
           >
             Report and share Violence Incidence directly on this platform.
           </Text>
@@ -131,7 +135,7 @@ export default function Home() {
               whiteSpace={`nowrap`}
               color={`secondary.600`}
               fontWeight={`bold`}
-              fontSize="md"
+              fontSize="xl"
             >
               <XMark color={`accent`} boxSize={`16px`} mr="8px" />
               No Registration Needed
@@ -140,7 +144,7 @@ export default function Home() {
               whiteSpace={`nowrap`}
               color={`secondary.600`}
               fontWeight={`bold`}
-              fontSize="md"
+              fontSize="xl"
             >
               <XMark color={`accent`} boxSize={`16px`} mr="8px" />
               No Personal Data Collected
@@ -149,19 +153,45 @@ export default function Home() {
         </Container>
 
         <Flex
-          mt={[`16px`, `0`]}
+          // mt={[`16px`, `0`]}
           alignItems={`end`}
-          width={`full`}
-          height={`full`}
+          alignSelf={`end`}
+          overflowX={`visible`}
+          // width={`full`}
+          // height={`full`}
         >
           {/* Desktop Image */}
-          <NextChakraImage
-            src={`/assets/landing/see-omething-say-something.png`}
-            alt="See something, Say something."
-            width={`900`}
-            height={`450`}
-            objectFit={isLargerThan800 ? `contain` : `cover`}
-          />
+          {!isLargerThan800 && (
+            <NextChakraImage
+              src={`/assets/landing/see-omething-say-something.png`}
+              alt="See something, Say something."
+              width={`400`}
+              height={`270`}
+              overflowX={`visible`}
+              objectFit={`cover`}
+            />
+          )}
+          {isLargerThan800 && !isLargerThan1100 && (
+            <NextChakraImage
+              src={`/assets/landing/see-omething-say-something.png`}
+              alt="See something, Say something."
+              width={`739`}
+              height={`500`}
+              overflowX={`visible`}
+              objectFit={`cover`}
+            />
+          )}
+
+          {isLargerThan1100 && (
+            <NextChakraImage
+              src={`/assets/landing/see-omething-say-something.png`}
+              alt="See something, Say something."
+              width={`960`}
+              height={`650`}
+              overflowX={`visible`}
+              objectFit={`cover`}
+            />
+          )}
         </Flex>
       </Flex>
 
@@ -170,8 +200,8 @@ export default function Home() {
         px={[`3rem`, `6rem`]}
         pt={[`4rem`, `0rem`]}
         width="full"
-        height={[`50px`, `400px`]}
-        bgColor={`primary.dark`}
+        height={[`400px`, `400px`]}
+        bgColor={`#24352e`}
         direction={[`column`, `row`]}
         justifyContent={[`center`]}
       >
@@ -183,7 +213,8 @@ export default function Home() {
           <Heading
             whiteSpace={`nowrap`}
             color={`white`}
-            fontSize={`2xl`}
+            fontSize={[`2xl`, `4xl`]}
+            fontWeight={`medium`}
             px={`24px`}
             mb={`8px`}
           >
@@ -224,8 +255,9 @@ export default function Home() {
         >
           <Video
             // outlineColor={`primary.dark`}
-            borderColor={`primary.dark`}
+            borderColor={`#24352e`}
             borderWidth="4px"
+            background={`#24352e`}
             autoPlay
             muted
             loop
@@ -238,9 +270,13 @@ export default function Home() {
       </Stack>
 
       {/* Map */}
-      <Box px={[`1rem`, `6rem`]} py={[`1rem`, `6rem`]}>
+      <Flex
+        px={[`1rem`, `6rem`]}
+        py={[`1rem`, `6rem`]}
+        justifyContent={`center`}
+      >
         <VTGeneralMap data={data} />
-      </Box>
+      </Flex>
     </Box>
   );
 }

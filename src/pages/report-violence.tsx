@@ -271,9 +271,9 @@ export default function ReportViolence() {
       py={`5rem`}
       background={`black`}
       alignItems={`start`}
-      backgroundImage={`/assets/images/report-violence.png`}
+      backgroundImage={`/assets/reports/report-violence.png`}
+      backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundSize={`cover`}
     >
       <Heading fontSize={`2xl`} fontWeight={`bold`} color={`primary.500`}>
         Report Violence
