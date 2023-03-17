@@ -365,6 +365,8 @@ export default function AccessData() {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      <Box height={[`0`, `300px`]} />
     </Box>
   );
 }

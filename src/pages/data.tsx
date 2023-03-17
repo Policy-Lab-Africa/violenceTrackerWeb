@@ -1,6 +1,6 @@
 import { AnimatedHeading, AnimatedText } from '@/components/Animated';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
-import { Container, Stack, VStack } from '@chakra-ui/react';
+import { Box, Container, Stack, VStack } from '@chakra-ui/react';
 
 export default function About() {
   return (
@@ -152,6 +152,8 @@ export default function About() {
           />
         </Container>
       </Stack>
+
+      <Box height={[`0`, `300px`]} />
     </VStack>
   );
 }

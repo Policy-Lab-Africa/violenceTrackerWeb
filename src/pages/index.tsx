@@ -362,6 +362,8 @@ export default function Home() {
           />
         </Flex>
       </Stack>
+
+      <Box height={[`0`, `300px`]} />
     </Box>
   );
 }

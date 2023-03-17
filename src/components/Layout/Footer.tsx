@@ -11,12 +11,11 @@ export default function Footer() {
     <Box
     // backgroundImage={`/assets/`}
     >
-      <Box height={[`0`, `300px`]} />
       <Box
-        bottom={0}
+        bottom={[`220px`, `0`]}
         width={`full`}
         height={`max-content`}
-        position={[`static`, `absolute`]}
+        position={[`absolute`]}
       >
         <FooterBG />
         {/* <Box bgColor={`primary.50`} height={[`180px`, `36px`]} /> */}

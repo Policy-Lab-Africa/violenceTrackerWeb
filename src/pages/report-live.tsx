@@ -49,6 +49,8 @@ export default function ReportLive() {
           <Video />
         </Flex>
       </Box>
+
+      <Box height={[`0`, `300px`]} />
     </VStack>
   );
 }

@@ -11,6 +11,7 @@ import {
 import ChakraReactSelect from '@/components/Inputs/Select';
 import { AttachmentIcon } from '@chakra-ui/icons';
 import {
+  Box,
   Button,
   Container,
   FormControl,
@@ -522,6 +523,8 @@ export default function ReportViolence() {
           </form>
         )}
       </Formik>
+
+      <Box height={[`0`, `300px`]} />
     </VStack>
   );
 }

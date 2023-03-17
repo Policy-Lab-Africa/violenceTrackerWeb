@@ -198,6 +198,8 @@ export default function About() {
           />
         </Container>
       </Stack>
+
+      <Box height={[`0`, `300px`]} />
     </VStack>
   );
 }

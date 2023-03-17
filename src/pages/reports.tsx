@@ -40,6 +40,8 @@ export default function Reports() {
 
         <ShowReports />
       </VStack>
+
+      <Box height={[`0`, `300px`]} />
     </Box>
   );
 }
