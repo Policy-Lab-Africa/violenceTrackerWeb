@@ -5,14 +5,14 @@ import Image from 'next/image';
 
 export default function About() {
   return (
-    <VStack width={`full`}>
+    <VStack width={`full`} marginY={`20`}>
       <Stack
         direction={[`column`, `row`]}
         pt={[`12px`, `12px`]}
         px={[`8px`, `5rem`]}
       >
         <Container
-          maxWidth={[`container.md`, `container.xl`]}
+          maxWidth={[`container.md`]}
           display={`flex`}
           flexDirection={`column`}
           justifyContent={`center`}
@@ -73,7 +73,7 @@ export default function About() {
         px={[`8px`, `5rem`]}
       >
         <Container
-          maxWidth={[`container.md`, `container.xl`]}
+          maxWidth={[`container.md`]}
           display={`flex`}
           flexDirection={`column`}
           justifyContent={`center`}
@@ -127,7 +127,7 @@ export default function About() {
         px={[`8px`, `5rem`]}
       >
         <Container
-          maxWidth={[`container.md`, `container.xl`]}
+          maxWidth={[`container.md`]}
           display={`flex`}
           flexDirection={`column`}
           justifyContent={`center`}

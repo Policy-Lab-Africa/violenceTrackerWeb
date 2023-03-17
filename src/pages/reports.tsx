@@ -1,13 +1,27 @@
 // import SearchWithFilter from '@/components/Inputs/SearchWithFilter';
 import ShowReports from '@/features/view-reports/ShowReports';
 import { Box, Flex, Heading, VStack } from '@chakra-ui/react';
+import { url } from 'inspector';
 
 export default function Reports() {
   return (
-    <Box bgColor={`secondary.900`} minHeight={`90vh`}>
-      <VStack px={[`1rem`, `6rem`]} pb={`5rem`} alignItems={`start`}>
+    <Box
+      bgColor={`secondary.900`}
+      minHeight={`90vh`}
+      backgroundImage={`/assets/reports/report-violence.png`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+    >
+      <VStack
+        px={[`1rem`, `6rem`]}
+        pb={`5rem`}
+        alignItems={`start`}
+        maxHeight="100vh"
+        overflowY={`scroll`}
+      >
         <Flex
-          bgColor={`secondary.900`}
+          // bgColor={`secondary.900`}
+          background={`transparent`}
           alignItems={`center`}
           width={`full`}
           justifyContent={`space-between`}

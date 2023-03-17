@@ -8,7 +8,7 @@ const CMarquee = chakra(Marquee);
 
 export default function MarqueeHeader() {
   const { data: reports } = useQuery(`headlines`, () =>
-    fetchViolenceReports(10),
+    fetchViolenceReports(5),
   );
 
   return (
@@ -41,7 +41,7 @@ export default function MarqueeHeader() {
         {reports &&
           reports.map((report, index) => (
             <Text fontSize={`md`} key={`headline-${index}`} pr="8px">
-              {report.description.substring(0, 30)}...
+              {report.description}
             </Text>
           ))}
       </CMarquee>

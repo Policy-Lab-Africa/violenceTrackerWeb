@@ -12,6 +12,7 @@ import {
   shouldForwardProp,
   Stack,
   Text,
+  useMediaQuery,
   VStack,
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
@@ -75,6 +76,7 @@ export default function Home() {
   const { data } = useQuery([`violence-report`, `summary`], () =>
     fetchViolenceReports(100),
   );
+  const [isLargerThan800] = useMediaQuery(`(min-width: 800px)`);
 
   return (
     <Box>
@@ -158,7 +160,7 @@ export default function Home() {
             alt="See something, Say something."
             width={`900`}
             height={`450`}
-            objectFit="cover"
+            objectFit={isLargerThan800 ? `contain` : `cover`}
           />
         </Flex>
       </Flex>
@@ -168,12 +170,16 @@ export default function Home() {
         px={[`3rem`, `6rem`]}
         pt={[`4rem`, `0rem`]}
         width="full"
-        height={[`350px`, `200px`]}
+        height={[`50px`, `400px`]}
         bgColor={`primary.dark`}
         direction={[`column`, `row`]}
         justifyContent={[`center`]}
       >
-        <VStack justifyContent={`center`} height={`100%`}>
+        <VStack
+          justifyContent={`center`}
+          height={`100%`}
+          width={[`100%`, `50%`]}
+        >
           <Heading
             whiteSpace={`nowrap`}
             color={`white`}
@@ -210,7 +216,12 @@ export default function Home() {
           </AnimatedBox>
           {/* <MapDirection boxSize={`24px`} color="primary.500" /> */}
         </VStack>
-        <VStack justifyContent={`flex-start`} height={[`full`]}>
+
+        <VStack
+          justifyContent={`flex-start`}
+          height={[`full`]}
+          width={[`100%`, `50%`]}
+        >
           <Video
             // outlineColor={`primary.dark`}
             borderColor={`primary.dark`}

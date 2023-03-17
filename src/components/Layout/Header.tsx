@@ -306,12 +306,6 @@ export default function Header() {
           </AnimatedBox>
         </Box>
       </VStack>
-      <Box
-        height={`0px`}
-        bgColor={`transparent`}
-        width={`full`}
-        boxShadow={`0px 7px 8px 8px #ffffffd7`}
-      />
     </AnimatedBox>
   );
 }

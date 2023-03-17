@@ -30,7 +30,7 @@ export default function GeneralMapReport({
   });
 
   return (
-    <Box width={`full`} height={[`300px`, `800px`]}>
+    <Box width={`full`} height={[`300px`, `700px`]}>
       <MapContainer
         center={[9.082, 8.6753]}
         zoom={isLargerThan800 ? 7 : 5}
