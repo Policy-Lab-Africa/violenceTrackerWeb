@@ -84,7 +84,34 @@ const ReportViolenceValidation = Yup.object().shape({
   type_id: Yup.mixed()
     .required(`Select the type of violence`)
     .label(`Violence Type`),
-  file: Yup.object<File>().notRequired().label(`Evidence`),
+  file: Yup.mixed<File>()
+    .test(
+      `Evidence`,
+      `File size should not be more than 20MB.`,
+      (file) => !file || file.size <= 20_000_000, // Check if `files` is defined and within 2MB
+    )
+    .test(
+      `Evidence`,
+      `We only support the following file types: jpeg,png,jpg,mp4,mov,ogg,qt,m3u8,3gp,avi,wmv.`,
+      (file) =>
+        !file ||
+        [
+          `jpeg`,
+          `png`,
+          `jpg`,
+          `mp4`,
+          `mov`,
+          `ogg`,
+          `qt`,
+          `m3u8`,
+          `3gp`,
+          `avi`,
+          `wmv`,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ].includes(file.name.split(`.`).pop()!), // Check if `files` is defined and within 2MB
+    )
+    .notRequired()
+    .label(`Evidence`),
 });
 
 export default function ReportViolence() {
@@ -210,9 +237,28 @@ export default function ReportViolence() {
       !values.ng_state_id ||
       !values.ng_local_government_id ||
       !values.ng_polling_unit_id ||
-      !values.type_id ||
-      !values.file
+      !values.type_id
     ) {
+      toast({
+        title: `Important(*) fields cannot be empty.`,
+        description: `Please check your inputs again.`,
+        status: `error`,
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    if (!values.description && !values.file) {
+      toast({
+        title: `Important(*) fields cannot be empty.`,
+        description: `Both description field and file evidence cannot be empty, please fill one or both.`,
+        status: `error`,
+        duration: 9000,
+        isClosable: true,
+      });
+
       return;
     }
 
@@ -231,7 +277,7 @@ export default function ReportViolence() {
     formData.append(`hashtags`, values.hashtags);
 
     // Add the uploaded File
-    formData.append(`file`, values.file);
+    if (values.file) formData.append(`file`, values.file);
 
     setRecaptchaVerified(false);
     reportViolenceSubmiter.mutate(formData, {
@@ -311,7 +357,7 @@ export default function ReportViolence() {
               >
                 <ChakraReactSelect
                   size={`lg`}
-                  placeholder={`Select State`}
+                  placeholder={`Select State*`}
                   options={states?.map((state) => ({
                     value: state.data_id,
                     label: state.name,
@@ -337,7 +383,7 @@ export default function ReportViolence() {
               >
                 <ChakraReactSelect
                   size={`lg`}
-                  placeholder={`Please Select LGA`}
+                  placeholder={`Please Select LGA*`}
                   options={lgas?.map((lga) => ({
                     value: lga.data_id,
                     label: lga.name,
@@ -362,7 +408,7 @@ export default function ReportViolence() {
               >
                 <ChakraReactSelect
                   size={`lg`}
-                  placeholder={`Select Ward`}
+                  placeholder={`Select Ward*`}
                   options={wards?.map((ward) => ({
                     value: ward.data_id,
                     label: ward.name,
@@ -387,7 +433,7 @@ export default function ReportViolence() {
               >
                 <ChakraReactSelect
                   size={`lg`}
-                  placeholder={`Select Polling Unit`}
+                  placeholder={`Select Polling Unit*`}
                   options={pus?.map((lga) => ({
                     value: lga.data_id,
                     label: lga.name,
@@ -409,7 +455,7 @@ export default function ReportViolence() {
               >
                 <ChakraReactSelect
                   size={`lg`}
-                  placeholder={`Select Violence Type`}
+                  placeholder={`Select Violence Type*`}
                   options={violenceTypes?.map((type) => ({
                     value: type.id,
                     label: type.name,
@@ -433,7 +479,7 @@ export default function ReportViolence() {
                   <Input
                     ref={violenceEvidence}
                     type={`file`}
-                    accept={`jpeg,jpg, png, gif`}
+                    accept={`image/*, video/*`}
                     size={`lg`}
                     bgColor={`white`}
                     color={`secondary.700`}
