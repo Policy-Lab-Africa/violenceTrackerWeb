@@ -126,7 +126,7 @@ export default function About() {
             >
               <Link
                 target={`_blank`}
-                href={`/assets/about/EVT_ User_Guide.pdf`}
+                href={`https://policylabafrica.org/wp-content/uploads/2023/03/EVT_-User_Guide.pdf`}
               >
                 Download User Manual
               </Link>
