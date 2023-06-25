@@ -1,4 +1,4 @@
-import { fetchViolenceReports } from '@/app/services/violence-report';
+import { fetchViolenceReports } from '@/api/services/violence-report';
 import XMark from '@/components/Icons/XMark';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
 import VTGeneralMap from '@/features/view-reports/VTGeneralMap';

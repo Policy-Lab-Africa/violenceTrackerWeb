@@ -1,4 +1,4 @@
-import { fetchInfiniteViolenceReports } from '@/app/services/violence-report';
+import { fetchInfiniteViolenceReports } from '@/api/services/violence-report';
 import Tweet from '@/components/Twitter/Tweet';
 import { Button, Container, HStack, Skeleton, Spinner } from '@chakra-ui/react';
 import { Fragment } from 'react';

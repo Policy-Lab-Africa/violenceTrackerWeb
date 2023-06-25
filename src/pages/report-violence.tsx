@@ -3,11 +3,11 @@ import {
   fetchPollingUnits,
   fetchStates,
   fetchWards,
-} from '@/app/services/inec-meta-data';
+} from '@/api/services/inec-meta-data';
 import {
   fetchViolenceTypes,
   submitViolentReport,
-} from '@/app/services/violence-report';
+} from '@/api/services/violence-report';
 import ChakraReactSelect from '@/components/Inputs/Select';
 import { AttachmentIcon } from '@chakra-ui/icons';
 import {

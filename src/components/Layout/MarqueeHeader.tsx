@@ -1,4 +1,4 @@
-import { fetchViolenceReports } from '@/app/services/violence-report';
+import { fetchViolenceReports } from '@/api/services/violence-report';
 import { chakra, Stack, Text } from '@chakra-ui/react';
 import Marquee from 'react-fast-marquee';
 import { useQuery } from 'react-query';

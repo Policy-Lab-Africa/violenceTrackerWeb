@@ -1,4 +1,4 @@
-import { searchReports } from '@/app/services/violence-report';
+import { searchReports } from '@/api/services/violence-report';
 import DataAggregator from '@/components/AccessData/DataAggregator';
 import StateResult from '@/components/AccessData/StateResult';
 import { AnimatedBox } from '@/components/Animated';
