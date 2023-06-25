@@ -1,7 +1,17 @@
 import { AnimatedHeading, AnimatedText } from '@/components/Animated';
 import { NextChakraImage } from '@/components/Images/NextChakraImage';
-import { Box, Button, Container, Link, Stack, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  Heading,
+  Link,
+  Stack,
+  VStack,
+} from '@chakra-ui/react';
 import Image from 'next/image';
+import { MdDownload } from 'react-icons/md';
 
 export default function About() {
   return (
@@ -110,27 +120,82 @@ export default function About() {
             data collected is open source and available for download and export.
           </AnimatedText>
           <Box>
-            <Button
-              mt={`12px`}
-              bgColor={`primary.500`}
-              borderColor={`primary.500`}
-              borderWidth="2px"
-              color={`surface`}
-              _hover={{
-                borderColor: `primary.500`,
-                bgColor: `surface`,
-                color: `primary.500`,
-              }}
-              size={`md`}
-              transition=".5s"
+            <Heading
+              as={`h3`}
+              fontSize={`md`}
+              mt={`4`}
+              color={`blackAlpha.600`}
             >
-              <Link
-                target={`_blank`}
-                href={`https://policylabafrica.org/wp-content/uploads/2023/03/EVT_-User_Guide.pdf`}
+              Download User Manual
+            </Heading>
+            <ButtonGroup>
+              <Button
+                mt={`12px`}
+                bgColor={`primary.500`}
+                borderColor={`primary.500`}
+                borderWidth="2px"
+                color={`surface`}
+                _hover={{
+                  borderColor: `primary.500`,
+                  bgColor: `surface`,
+                  color: `primary.500`,
+                }}
+                size={`md`}
+                transition=".5s"
+                leftIcon={<MdDownload />}
+                onClick={() => {
+                  window.open(
+                    `https://policylabafrica.org/wp-content/uploads/2023/03/EVT_-User_Guide.pdf`,
+                  );
+                }}
               >
-                Download User Manual
-              </Link>
-            </Button>
+                English
+              </Button>
+              <Button
+                mt={`12px`}
+                bgColor={`primary.500`}
+                borderColor={`primary.500`}
+                borderWidth="2px"
+                color={`surface`}
+                _hover={{
+                  borderColor: `primary.500`,
+                  bgColor: `surface`,
+                  color: `primary.500`,
+                }}
+                size={`md`}
+                transition=".5s"
+                leftIcon={<MdDownload />}
+                onClick={() => {
+                  window.open(
+                    `https://prod-api.violencetrack.ng/artifacts/EVT_%20User%20Manual%20Pidgin.pdf`,
+                  );
+                }}
+              >
+                Pidgin
+              </Button>
+              <Button
+                mt={`12px`}
+                bgColor={`primary.500`}
+                borderColor={`primary.500`}
+                borderWidth="2px"
+                color={`surface`}
+                _hover={{
+                  borderColor: `primary.500`,
+                  bgColor: `surface`,
+                  color: `primary.500`,
+                }}
+                size={`md`}
+                transition=".5s"
+                leftIcon={<MdDownload />}
+                onClick={() => {
+                  window.open(
+                    `https://prod-api.violencetrack.ng/artifacts/EVT_%20User%20Manual%20Hausa.pdf`,
+                  );
+                }}
+              >
+                Hausa
+              </Button>
+            </ButtonGroup>
           </Box>
         </Container>
         <Container display={`flex`} justifyContent={`center`}>
