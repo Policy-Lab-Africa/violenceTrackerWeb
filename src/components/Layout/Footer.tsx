@@ -60,7 +60,7 @@ export default function Footer() {
             National Endowment for Democracy (NED)
           </Text>
 
-          <Text>Copyright &copy; 2023</Text>
+          <Text>Copyright &copy; 2023–{new Date().getFullYear()}</Text>
         </VStack>
 
         <Box display={[`none`, `block`]}>
