@@ -487,6 +487,7 @@ export default function ReportViolence() {
                     fontWeight={`semibold`}
                     placeholder={`Upload Evidence`}
                     name="file"
+                    onBlur={handleBlur}
                     onChange={(event) => {
                       setFieldValue(`file`, event.currentTarget.files?.item(0));
                     }}
