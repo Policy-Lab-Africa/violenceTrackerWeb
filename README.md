@@ -58,7 +58,9 @@ pnpm create next-app -e https://github.com/jpedroschmitz/typescript-nextjs-start
 To start the project locally, run:
 
 ```bash
-pnpm dev
+yarn install
+yarn dev              # development
+yarn build && yarn start  # production (start needs a build first)
 ```
 
 Open `http://localhost:3000` with your browser to see the result.
